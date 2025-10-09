@@ -217,11 +217,9 @@ docker exec -it lnd lncli wtclient add <address>
 
 Here is more info about watchtowers and a list of watchtowers you may want to connect to:
 
-- Watchtower list · Issue #4 · openoms/lightning-node-management
-- GitHub
-- openoms
-- Configuring Watchtowers | Builder’s Guide
-- Builder's Guide
+- [Watchtower list](https://github.com/openoms/lightning-node-management/issues/4)
+- [Configuring Watchtowers](https://docs.lightning.engineering/lightning-network-tools/lnd/watchtower)
+
 
 Be advised that using watchtowers can reduce your privacy in exchange for offering protections against misbehaving peers. It is up to you whether you decide to use them or not.
 

@@ -1,11 +1,10 @@
-## byakugon — a sovereignty-first Bitcoin blog
+## Byakugan.io — a Fovereignty-First Bitcoin blog
 
-Byakugon is a GitHub Pages–hosted, open repository for articles, guides, and
+Byakuga.io is a GitHub Pages–hosted, open repository for articles, guides, and
 notes about running Bitcoin with sovereignty and privacy. The name nods to the
-Byakugan kekkei genkai: see clearly, store privately, act
-intentionally.
+Byakugan kekkei genkai.
 
-![byakugon](/assets/img/readme.png)
+![byakugan](/assets/img/readme.png)
 
 ## What you’ll find
 - Reproducible guides focused on nodes, privacy, and self-hosting
