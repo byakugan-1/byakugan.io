@@ -1,6 +1,6 @@
-## Byakugan.io — a Fovereignty-First Bitcoin blog
+## Byakugan.io — a Sovereignty-First Bitcoin blog
 
-Byakuga.io is a GitHub Pages–hosted, open repository for articles, guides, and
+Byakugan.io is a GitHub Pages–hosted, open repository for articles, guides, and
 notes about running Bitcoin with sovereignty and privacy. The name nods to the
 Byakugan kekkei genkai.
 
