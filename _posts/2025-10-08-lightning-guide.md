@@ -5,7 +5,7 @@ categories: [Guide, Privacy]
 tags: [bitcoin, node, lightning, alby, ride the lightning, zeus, boltz]     # TAG names should always be lowercase
 description: Learn How to setup LND, Alby Hub, Ride the Lightning and Zeus
 # comments: false
-pin: true
+# pin: true
 ---
 
 
