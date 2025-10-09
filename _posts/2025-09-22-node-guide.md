@@ -218,7 +218,7 @@ sudo apt install -y avahi-daemon
 # (or whatever yout hostname is instead of nodebox)
 ```
 
-### Optional: Cockpit (browser UI at [http://nodebox.local:9090](http://nodebox.local:9090))
+### Optional: Cockpit (browser UI at [nodebox.local:9090](nodebox.local:9090))
 ```bash
 sudo apt install -y cockpit
 ```
@@ -948,7 +948,7 @@ docker compose ps
 > Shows running containers and ports
 
 ### Access mempool.space
-- LAN: [http://nodebox.local:4080](http://nodebox.local:4080) (or your node IP)
+- LAN: [nodebox.local:4080](nodebox.local:4080) (or your node IP)
 - Tor: Use the mempool onion created earlier; visit with Tor Browser
 
 ### To Update
