@@ -1,43 +1,105 @@
-# Chirpy Starter
+## byakugon — a sovereignty-first Bitcoin blog
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+Byakugon is a GitHub Pages–hosted, open repository for articles, guides, and
+notes about running Bitcoin with sovereignty and privacy. The name nods to the
+Byakugan kekkei genkai: see clearly, store privately, act
+intentionally.
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+![byakugon](/assets/img/readme.png)
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+## What you’ll find
+- Reproducible guides focused on nodes, privacy, and self-hosting
+- Minimal, auditable configurations over “one-click” black boxes
+- Plain-language explanations of trade-offs and operational security
+- Per-post comment threads on GitHub so anyone can react or discuss in the open
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+## How to contribute
+You do not need to be a “shadowy super coder” to help. Every contribution helps.
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
+- Request a topic or guide you think others will find useful
+- Fix typos, broken links, or clarify confusing steps
+- Update out-of-date content (versions, flags, screenshots)
+- Propose a new guide or add practical tips to an existing one
+
+### Quick paths
+- Non-technical: open an issue describing what should change or be added
+- Technical: fork the repo and submit a pull request with your edits
+
+## Comments and reactions
+Each post includes an open comment thread at the bottom that uses GitHub.
+- Click the comment section under post to discuss, ask questions, or react
+- Keep it constructive, specific, and respectful
+- If something needs a code or content change, consider opening an issue or PR
+
+## Local development (GitHub Pages/Jekyll)
+The site is designed to build on GitHub Pages. You can also run it locally.
+
+### Prerequisites
+- Ruby and Bundler installed
+- Jekyll (GitHub Pages supports a specific Jekyll stack)
+
+### Build and serve locally
+```bash
+bundle install
+bundle exec jekyll serve
 ```
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+Site will be available at:
+- http://127.0.0.1:4000
+- or the baseurl configured in _config.yml
 
-## Usage
+## Repository structure (typical)
+- _posts/ — dated Markdown posts (YYYY-MM-DD-title.md)
+- _layouts/, _includes/, _data/ — theme and site structure
+- assets/ — images, CSS, JS
+- pages like about.md, index.md
+- README.md (this file)
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+Note: Exact structure may varyrepo for details.
 
-## Contributing
+## Writing guidelines
+- Use Markdown. Prefer headings, lists, and fenced code blocks over HTML
+- Commands: fenced code blocks with language hints (e.g., ```bash)
+- Configuration files: ```txt or appropriate language (e.g., ```yaml, ```ini)
+- Be explicit about versions and commands; add verification steps where relevant
+- Explain the “why”, not just the “how”
+- Note privacy and security trade-offs where applicable
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+## Submitting changes
+1. Fork the repository
+2. Create a feature branch
+3. Make your edits (keep commits focused and descriptive)
+4. Run the site locally if possible to verify formatting/build
+5. Open a pull request describing what you changed and why
+
+## Issues
+Use issues to:
+- Suggest topics or guides
+- Report inaccuracies, broken links, or outdated instructions
+- Ask clarifying questions that could improve a post
+
+Please include:
+- The URL or file you’re referencing
+- Steps to reproduce, if applicable
+- Proposed fix or links to sources
+
+## Scope and ethos
+- Sovereignty and Bitcoin first: verify, minimize trust, retain control
+- Privacy by default, sharing by choice
+- Fewer moving parts where possible; clear, maintainable ops
+
+## Acknowledgements
+This project stands on the shoulders of the free and open-source community:
+Bitcoin Core contributors, node operators, privacy researchers, and educators
+who publish their work.
 
 ## License
+Unless otherwise specified, content in this repository is available under an
+open license. See LICENSE in the root of the repository.
 
-This work is published under [MIT][mit] License.
+## Disclaimer
+Nothing here is financial advice. You are responsible for your own due
+diligence, local laws, and maintenance. Test changes, keep good backups,
+and verify before you trust.
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+Byakugan — see clearly, store privately, act intentionally.
