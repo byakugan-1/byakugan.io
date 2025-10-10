@@ -2,7 +2,7 @@
 title: SeedSigner "firmware" isn't what you think it is
 date: 2024-09-27 12:30:00 +0000
 categories: [Blog, Security]
-tags: [bitcoin,seedsigner,secuty]     # TAG names should always be lowercase
+tags: [bitcoin,seedsigner,security]     # TAG names should always be lowercase
 description: A clear breakdown of why SeedSigner’s “firmware risk” is misunderstood, and how the real vulnerability lies in the SD card, not the device itself.
 # comments: false
 author: keith_mukai
