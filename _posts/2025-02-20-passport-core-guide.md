@@ -26,9 +26,7 @@ Priced at $199, the Passport is positioned as a high-end hardware wallet, compet
 
 To manage your secure wallet on a Passport, you have several options. This hardware wallet is compatible with the majority of wallet management software on the market, including Sparrow Wallet, Specter Desktop, Nunchuk, Keeper, among others. In this tutorial, we'll learn how to use it with Sparrow Wallet.
 
-If you're a beginner, the easiest option is to use your Passport with the native Envoy application, developed by Foundation. To find out how to use Envoy with your Passport, check out this other tutorial:
-
-[https://planb.network/tutorials/wallet/mobile/envoy-3ae5d6c7-623b-45b3-bb34-abcf9572b7cb](https://planb.network/tutorials/wallet/mobile/envoy-3ae5d6c7-623b-45b3-bb34-abcf9572b7cb)
+If you're a beginner, the easiest option is to use your Passport with the native Envoy application, developed by Foundation. To find out how to use Envoy with your Passport, check out this other [tutorial](https://planb.network/tutorials/wallet/mobile/envoy-3ae5d6c7-623b-45b3-bb34-abcf9572b7cb).
 
 ## Unboxing the Passport
 
@@ -143,9 +141,7 @@ To do this, use the MicroSD card included in your Passport box (or another one),
 
 ![Image](/assets/img/passport-core-guide-images/21.webp)
 
-Before installing it on your device, we strongly advise you to check the authenticity and integrity of the downloaded firmware. If you need help with this, consult this tutorial:
-
-[https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc)
+Before installing it on your device, we strongly advise you to check the authenticity and integrity of the downloaded firmware. If you need help with this, consult this [tutorial](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc).
 
 After checking the `.bin` file, place it on your MicroSD, then insert it into the Passport. The Passport file explorer will open. Select the file `vN.N.N-passport.bin`.
 
@@ -209,9 +205,7 @@ Click on the confirmation button to see your mnemonic phrase.
 
 ![Image](/assets/img/passport-core-guide-images/34.webp)
 
-For more information on the proper way to save and manage your mnemonic phrase, I highly recommend following this other tutorial, especially if you're a beginner:
-
-[https://planb.network/tutorials/wallet/backup/backup-mnemonic-22c0ddfa-fb9f-4e3a-96f9-46e2a7954270](https://planb.network/tutorials/wallet/backup/backup-mnemonic-22c0ddfa-fb9f-4e3a-96f9-46e2a7954270)
+For more information on the proper way to save and manage your mnemonic phrase, I highly recommend following this other tutorial, especially if you're a [beginner](https://planb.network/tutorials/wallet/backup/backup-mnemonic-22c0ddfa-fb9f-4e3a-96f9-46e2a7954270):
 
 of course, you must never share these words on the Internet, as I'm doing in this tutorial. This sample wallet will be used only on Testnet and will be deleted at the end of the tutorial.
 
@@ -295,9 +289,7 @@ Finally, the "*Extensions*" sub-menu lets you activate functions specific to cer
 
 Before continuing, if you wish, you can add a BIP39 passphrase. A BIP39 passphrase is an optional password that you can choose freely, and which is added to your mnemonic phrase to reinforce wallet security. With this feature enabled, access to your Bitcoin wallet will require both the mnemonic and the passphrase. Without either, it would be impossible to recover the wallet.
 
-Before configuring this option on your Passport, it is strongly recommended that you read this article to fully understand the theoretical operation of the passphrase and avoid errors that could lead to the loss of your bitcoins:
-
-[https://planb.network/tutorials/wallet/backup/passphrase-a26a0220-806c-44b4-af14-bafdeb1adce7](https://planb.network/tutorials/wallet/backup/passphrase-a26a0220-806c-44b4-af14-bafdeb1adce7)
+Before configuring this option on your Passport, it is strongly recommended that you read [this article](https://byakugan.io/posts/passphrases) to fully understand the theoretical operation of the passphrase and avoid errors that could lead to the loss of your bitcoins.
 
 To activate it, go to the "*More*" menu and click on "*Enter Passphrase*".
 
@@ -329,9 +321,7 @@ Start by downloading and installing Sparrow Wallet [from the official website](h
 
 ![Image](/assets/img/passport-core-guide-images/54.webp)
 
-Be sure to check the authenticity and integrity of the software before installation. If you don't know how to do this, please consult this tutorial:
-
-[https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc)
+Be sure to check the authenticity and integrity of the software before installation. If you don't know how to do this, please consult this [tutorial](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc).
 
 Once Sparrow Wallet is open, click on the "*File*" tab, then on "*New Wallet*".
 
