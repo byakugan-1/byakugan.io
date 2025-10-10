@@ -2,13 +2,11 @@
 title: SeedSigner "firmware" isn't what you think it is
 date: 2024-09-27 12:30:00 +0000
 categories: [Blog, Security]
-tags: [bitcoin,seedsigner,security]     # TAG names should always be lowercase
+tags: [bitcoin,seedsigner,secuty]     # TAG names should always be lowercase
 description: A clear breakdown of why SeedSigner’s “firmware risk” is misunderstood, and how the real vulnerability lies in the SD card, not the device itself.
 # comments: false
 author: keith_mukai
 ---
-
-# SeedSigner "firmware" isn't what you think it is
 
 On [Rabbit Hole Recap #320](https://youtu.be/yD-3Z9zl_QU?t=2277), ODELL said:
 
@@ -28,7 +26,9 @@ When you first power this new machine on, there's obviously no operating system 
 
 And yet the computer still does something. It shows you an initial boot screen. Hitting a certain key even opens up an interactive menu.
 
-<img src="https://i.nostr.build/2OR1oik0wS8YMJVo.webp" width="250"> <img src="https://i.nostr.build/E5nWuzz5H3v5jH0f.png" width="250">
+![BIOS setup screen example](https://i.nostr.build/2OR1oik0wS8YMJVo.webp){: width="250" }
+
+![BIOS menu example](https://i.nostr.build/E5nWuzz5H3v5jH0f.png){: width="250" }
 
 BUT WHERE IS THAT COMING FROM?! YOUR DRIVE IS STILL BLANK!!!
 
@@ -76,13 +76,13 @@ The top layer is combined in this case because "a firmware update" can change an
 ## Important facts about the Raspberry Pi Zero
 The popular Raspberry Pi devices that most people are familiar with are full Linux computers. Even the tiny $10 Pi Zero that SeedSigner runs on is a full Linux computer.
 
-<img src="https://i.nostr.build/K1MUF8boPLDS2LxN.jpg" width="250">
+<img src="https://i.nostr.build/K1MUF8boPLDS2LxN.jpg" width="250" alt="Raspberry Pi Zero board">
 
 And so, just like the above, they have their version of a BIOS. Raspis have firmware. You'll see it mostly referred to as a "bootloader". I'll be using the terms interchangeably.
 
 The full-size Pi 4B and Pi 5 that people run bitcoin nodes on (waste of money; do better!) have an onboard [EEPROM](https://en.wikipedia.org/wiki/EEPROM) that stores their bootloader. The second "E" in "EEPROM" stands for "Erasable"; you can update the Pi 4B and 5 firmware, just like you can your desktop machine's BIOS.
 
-<img src="https://i.nostr.build/L2wkixoYxxE2MdB9.jpg" width="250">
+<img src="https://i.nostr.build/L2wkixoYxxE2MdB9.jpg" width="250" alt="Raspberry Pi firmware EEPROM example">
 
 
 ### BUT THE PI ZERO IS DIFFERENT
@@ -92,9 +92,9 @@ THE PI ZERO'S ONBOARD FIRMWARE CANNOT BE CHANGED!!
 
 (same for the Zero W and Zero 2W variants)
 
-<img src="https://i.nostr.build/Wgbxwlc4wkZQ65wB.png" width="600">
+<img src="https://i.nostr.build/Wgbxwlc4wkZQ65wB.png" width="600" alt="Pi Zero boot ROM documentation screenshot 1">
 
-<img src="https://i.nostr.build/RIPVVPwWf9nGScjV.png" width="600">
+<img src="https://i.nostr.build/RIPVVPwWf9nGScjV.png" width="600" alt="Pi Zero boot ROM documentation screenshot 2">
 
 see: [link1](https://forums.raspberrypi.com/viewtopic.php?t=249725#p1524671), [link2](https://forums.raspberrypi.com/viewtopic.php?t=370400#p2219122)
 
@@ -181,7 +181,7 @@ How much is that one misunderstanding sinking everyone's ship here?
 
 
 ## What HAS SeedSigner (the man) said about device sharing?
-<img src="https://i.nostr.build/LaEklHSqE1J9GgF0.png" width="600">
+<img src="https://i.nostr.build/LaEklHSqE1J9GgF0.png" width="600" alt="SeedSigner device sharing guidance screenshot">
 
 (I'm sure there are even earlier examples of him expressing this nuance, but saying this 20mo ago establishes a deep enough track record)
 
