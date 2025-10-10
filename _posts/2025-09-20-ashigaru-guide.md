@@ -6,10 +6,8 @@ tags: [ashigaru, ashigaru terminal, privacy]     # TAG names should always be lo
 description: Learn how to setup and use Ashigaru Terminal for use in your browser
 # comments: false
 pin: true
+author: zeroxsix
 ---
-
-This Guide is written by:
- - [zeroXsix](https://x.com/0x6b796333), Paynym: [+abundantserve46](https://paynym.rs/+abundantserve46)
 
 This guide walks you through setting up the Ashigaru Terminal on a secure Ubuntu/Debian system using:
 
@@ -202,4 +200,4 @@ sudo reboot
 
 Always do your own research and make decisions based on your own informed judgment
 
-Edited by me: [+headymouth97](https://paynym.rs/+headymouth97)
+Edited by: [+headymouth97](https://paynym.rs/+headymouth97)
