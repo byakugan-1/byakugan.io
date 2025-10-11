@@ -1,5 +1,5 @@
 ---
-title: GnuPG Guide
+title: GnuPG Guide (GPG)
 date: 2025-03-12 12:30:00 +0000
 categories: [Guide, Security]
 tags: [security,authentication,gpg,gnupg,sparrow,authenticity]     # TAG names should always be lowercase
