@@ -1,3 +1,8 @@
+vibrant:
+  name: Vibrant
+  twitter: https://x.com/VibrantBTC
+  url: https://x.com/VibrantBTC
+
 keith_mukai:
   name: Keith Mukai
   twitter: https://x.com/KeithMukai
@@ -17,3 +22,13 @@ loicpandul:
   name: Loïc Morel
   twitter: https://x.com/Loic_Pandul
   url: https://pandul.fr
+
+pierre:
+  name: Pierre
+  twitter: https://x.com/pivi___
+  url: https://x.com/pivi___
+
+runningbitcoin:
+  name: Running Bitcoin
+  twitter: https://primal.net/p/npub1gjje9s2ehuudjmnqad7azs0qgmjdyvnuz48wwxcl7u2n8y5vh5fsee3ju0
+  url: https://github.com/runningbitcoin21

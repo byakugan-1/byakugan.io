@@ -1,8 +1,8 @@
 ---
 title: Mullvad VPN Guide
-date: 2025-02-20 12:30:00 +0000
+date: 2025-03-12 12:30:00 +0000
 categories: [Guide, Network]
-tags: [network,vpn,mullvad,seecurity]     # TAG names should always be lowercase
+tags: [network,vpn,mullvad,security]     # TAG names should always be lowercase
 description: How to get up and running with Mullvad VPN paid for in Bitcoin
 # comments: false
 author: loicpandul
