@@ -61,17 +61,17 @@ Use this for Bitcoin Core, Umbrel, RaspiBlitz, MyNode, RaspiBolt. The script aut
 ```bash
 wget https://github.com/noosphere888/Ban-Knots/releases/download/v1.2.2/standalone-ban-knots.sh
 ```
-Downloads the standalone script.
+> Downloads the standalone script.
 
 ```bash
 chmod +x standalone-ban-knots.sh
 ```
-Makes the script executable.
+> Makes the script executable.
 
 ```bash
 ./standalone-ban-knots.sh --install-cron
 ```
-Installs a cron job to run every 10 minutes with auto‑detected auth.
+> Installs a cron job to run every 10 minutes with auto‑detected auth.
 
 > Check “crontab -l” to confirm the recurring job is set. Logs go to a temp file you can tail.
 {: .prompt-tip }
@@ -81,7 +81,7 @@ Optionally enable the external IP banlist (from a community repo) and merge it w
 ```bash
 ./standalone-ban-knots.sh --external-ban-list --install-cron
 ```
-Adds the external list and installs cron.
+> Adds the external list and installs cron.
 
 > Enabling the external banlist contacts GitHub. Use Tor (e.g., torsocks) or a VPN if you care about metadata leakage.
 {: .prompt-warning }
@@ -94,12 +94,12 @@ Use this if auto‑detection fails or you’re on Start9 (explicit creds typical
 wget https://github.com/noosphere888/Ban-Knots/releases/download/v1.2.2/standalone-ban-knots.sh
 chmod +x standalone-ban-knots.sh
 ```
-Downloads and prepares the script.
+> Downloads and prepares the script.
 
 ```bash
 ./standalone-ban-knots.sh -u yourrpcuser -P yourrpcpass --install-cron
 ```
-Installs cron using your RPC username/password.
+> Installs cron using your RPC username/password.
 
 ### Option C — Config file (rarely needed)
 
@@ -115,12 +115,12 @@ ban_duration=157680000
 disconnect_only=false
 EOF
 ```
-Creates a config file with your settings.
+> Creates a config file with your settings.
 
 ```bash
 ./standalone-ban-knots.sh -c ~/.bitcoin/ban-knots.conf --install-cron
 ```
-Installs cron using the config file.
+> Installs cron using the config file.
 
 ## Verify and monitor
 
@@ -128,13 +128,13 @@ Installs cron using the config file.
   ```bash
   crontab -l
   ```
-  Confirms the job is scheduled.
+  > Confirms the job is scheduled.
 
 - Follow the log
   ```bash
   tail -f /tmp/ban-knots.log
   ```
-  See detections and actions in real time.
+  > See detections and actions in real time.
 
 > Safe preview: “./standalone-ban-knots.sh --dry-run” shows what would happen without changing anything.
 {: .prompt-tip }
@@ -145,25 +145,25 @@ Installs cron using the config file.
   ```bash
   ./standalone-ban-knots.sh --disconnect-only
   ```
-  Light‑touch pruning that avoids long bans.
+  > Light‑touch pruning that avoids long bans.
 
 - Adjust ban duration (example: 30 days in seconds)
   ```bash
   ./standalone-ban-knots.sh -d 2592000
   ```
-  Sets a shorter ban if you prefer.
+  > Sets a shorter ban if you prefer.
 
 - Enable external banlist later
   ```bash
   ./standalone-ban-knots.sh --external-ban-list
   ```
-  Merges upstream IPs with your local discoveries.
+  > Merges upstream IPs with your local discoveries.
 
 - Use a custom cookie path
   ```bash
   ./standalone-ban-knots.sh --cookie-path /custom/path/.cookie
   ```
-  Helpful for nonstandard installs.
+  > Helpful for nonstandard installs.
 
 > Review logs periodically; if pruning is too aggressive, shorten the ban or switch to disconnect‑only.
 {: .prompt-info }
