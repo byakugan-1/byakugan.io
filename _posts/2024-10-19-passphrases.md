@@ -20,9 +20,8 @@ This is where the passphrase comes in. It's an optional password that you can fr
 
 ![PASSPHRASE BIP39](assets/img/passphrase-images/02.webp)
 
-Be careful not to confuse the passphrase with your hardware wallet's PIN code or the password used to unlock access to your wallet on your computer. Unlike all these elements, the passphrase plays a role in the derivation of your wallet's keys. **This means that without it, you will never be able to recover your bitcoins.**
-
-The passphrase works in tandem with the mnemonic phrase, altering the seed from which the keys are generated. Thus, even if someone obtains your 12 or 24-word phrase, without the passphrase, they cannot access your funds. **Using a passphrase essentially creates a new wallet with distinct keys. Modifying (even slightly) the passphrase will generate a different wallet.**
+> Do not confuse the BIP39 passphrase with a device PIN or software login password: the passphrase is part of key derivation. Without the exact passphrase, your bitcoins are unrecoverable. Changing it (even slightly) creates a different wallet with different keys.
+{: .prompt-danger }
 
 ## Why should you use a passphrase?
 
@@ -33,10 +32,11 @@ Next, it can be used strategically to create a decoy wallet, to deal with physic
 Finally, using a passphrase is interesting when one wishes to control the randomness of the HD wallet's seed generation.
 
 ## How to choose a good passphrase?
-For the passphrase to be effective, it must be sufficiently long and random. Just like with a strong password, I recommend choosing a passphrase that is as long and random as possible, with a variety of letters, numbers, and symbols to make any brute force attack impossible.
+
+> Use a long, high‑entropy passphrase. As a 2025 baseline: at least 13 random characters including digits, lowercase/uppercase letters, and symbols (or 14+ if only letters). Prefer 20+ characters with mixed classes to future‑proof against brute‑force advances.
+{: .prompt-tip }
 
 According to [a study conducted by Trezor in 2019](https://blog.trezor.io/is-your-passphrase-strong-enough-d687f44c63af), an attacker with access to your seed and using a high-end GPU rented on AWS (NVIDIA Tesla V100) could test nearly 620 million passphrases for 1 dollar. As a rough estimate, with 2019 capabilities, a passphrase made of 12 random lowercase letters would cost on average **77 million dollars** to crack.
 
-However, I advise against limiting yourself to 12 characters. Aim instead for current standards for strong passwords: in 2025, aim for at least 13 random characters including digits, lowercase and uppercase letters, and symbols; or 14 characters if using only lowercase and uppercase letters. Naturally, I recommend aiming higher, for example by choosing a 20-character passphrase with symbols, to anticipate future developments and account for human risks that are not considered in these studies.
-
-It is also important to properly save this passphrase, in the same way as the mnemonic phrase. **Losing it means losing access to your bitcoins**. I strongly advise against memorizing it solely in your head, as this unreasonably increases the risk of loss. The ideal is to write it down on a physical medium (paper or metal) separate from the mnemonic phrase. This backup must obviously be stored in a different location from where your mnemonic phrase is kept to prevent both from being compromised simultaneously.
+> Back up your passphrase like your mnemonic: write it on a physical medium (paper or metal), stored separately from the mnemonic phrase and in a different location. If you lose the passphrase, you lose access to your bitcoins; do not rely solely on memory.
+{: .prompt-danger }

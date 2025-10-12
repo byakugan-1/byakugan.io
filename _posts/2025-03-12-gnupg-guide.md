@@ -5,7 +5,7 @@ categories: [Guide, Security]
 tags: [security,authentication,gpg,gnupg,sparrow,authenticity]     # TAG names should always be lowercase
 description: How to verify the integrity and authenticity of software?
 # comments: false
-author: loicpandul
+authors: [loicpandul, vibrant]
 ---
 
 ![cover](/assets/img/gpg-guide-images/cover.webp)
@@ -16,7 +16,8 @@ Verifying integrity involves ensuring that the downloaded file has not been modi
 
 Verifying authenticity, on the other hand, ensures that the file indeed comes from the official developer and not an impostor. This is done by verifying a digital signature. This signature proves that the software was signed with the legitimate developer's private key.
 
-If these checks are not performed, there is a risk of installing malware that could contain modified code. This code could either steal information like your private keys or block access to your files. This type of attack is quite common, especially in the context of open-source software where counterfeit versions can be distributed.
+> If you skip these checks, you risk installing malware that can steal private keys or corrupt files — do not install until both authenticity and integrity are verified.
+{: .prompt-danger }
 
 To perform this verification, we will use two tools: hashing functions to verify integrity, and GnuPG, an open-source tool that implements the PGP protocol, to verify authenticity.
 
@@ -74,7 +75,11 @@ Download the PGP signature of the file as well. This is the document in .asc for
 
 ![Image](/assets/img/gpg-guide-images/06.webp)
 
-Make sure to place all these files in the same folder for the following steps.
+> Download installers, hashes, and signatures only from official release pages to reduce spoofed or tampered assets.
+{: .prompt-warning }
+
+> Place the installer, hash/manifest, and .asc signature in the same folder to simplify verification commands.
+{: .prompt-tip }
 
 Finally, you will need the developer's public key, which we will use to verify the PGP signature. This key is often available either on the software's website, on the GitHub repository of the project, sometimes on the developer's social media, or on specialized sites like Keybase. In the case of Sparrow Wallet, you can find developer Craig Raw's public key [on Keybase](https://keybase.io/craigraw). To download it directly from the terminal, execute the command:
 
@@ -83,6 +88,9 @@ curl https://keybase.io/craigraw/pgp_keys.asc | gpg --import
 ```
 
 ![Image](/assets/img/gpg-guide-images/07.webp)
+
+> Verify the public key fingerprint from multiple independent sources (site, GitHub, Keybase, social) before trusting it; do not rely on a single source.
+{: .prompt-warning }
 
 ## Verifying the Signature
 
@@ -106,9 +114,15 @@ Replace "[file.asc]" with the path of the signature file. In the case of Sparrow
 
 ![Image](/assets/img/gpg-guide-images/09.webp)
 
+> If signature verification fails or references an unexpected key, do not proceed — the asset may be tampered or signed by an impostor.
+{: .prompt-danger }
+
 If the signature is valid, GPG will indicate this to you. You can then move on to the next step, as this confirms the file's authenticity.
 
 ![Image](/assets/img/gpg-guide-images/10.webp)
+
+> A “good signature” is only meaningful if the signing key’s fingerprint matches the developer’s independently published fingerprint.
+{: .prompt-tip }
 
 ## Verifying the Hash
 
@@ -128,7 +142,8 @@ The terminal will return the hash of the downloaded software.
 
 ![Image](/assets/img/gpg-guide-images/12.webp)
 
-Be aware, for some software, it may be necessary to use a different hash function than SHA256. In this case, simply replace the hash function's name in the command.
+> Some projects use different algorithms (e.g., SHA512). Use the algorithm specified by the developer for accurate comparison.
+{: .prompt-info }
 
 Then compare the result with the corresponding value in the file "sparrow-2.0.0-manifest.txt".
 
@@ -168,4 +183,10 @@ And if the hashes match, you should see the following output:
 sparrow_2.0.0-1_amd64.deb: OK
 ```
 
+> If the hash does not match, do not install — re-download from the official source and repeat verification.
+{: .prompt-danger }
+
 You are now assured that the software you've downloaded is both authentic and intact. You can proceed with its installation on your machine.
+
+> Repeat these checks for every update or re-install; never trust cached files without re-verification.
+{: .prompt-tip}

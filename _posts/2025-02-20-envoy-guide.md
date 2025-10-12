@@ -5,7 +5,7 @@ categories: [Guide, Wallets]
 tags: [bitcoin,sparrow,security,wallets,hardware,foundation passport,envoy]     # TAG names should always be lowercase
 description: How to Set up and use a Passport with the Envoy application
 # comments: false
-author: loicpandul
+authors: [loicpandul, vibrant]
 ---
 
 ![cover](/assets/img/envoy-guide-images/cover.webp)
@@ -30,9 +30,12 @@ If you're an advanced user and want to explore more complex features, I recommen
 
 ## Unboxing the Passport
 
-When you receive your Passport, make sure the box and seal on the carton are intact to confirm that the package has not been opened. A software verification of the device's authenticity and integrity will also be carried out when it is set up.
+When you receive your Passport, make sure the box and seal on the carton are intact to confirm that the package has not been opened.
 
 ![Image](/assets/img/envoy-guide-images/02.webp)
+
+> If the box or seal shows signs of tampering, stop setup and contact the seller to avoid using a compromised device.
+{: .prompt-danger }
 
 Box contents include:
 
@@ -59,6 +62,9 @@ On the device, you will find:
 
 ![Image](/assets/img/envoy-guide-images/03.webp)
 
+> A software authenticity and integrity check is performed during setup to confirm the device is genuine.
+{: .prompt-info }
+
 ## Download Envoy application
 
 Go to your app store to download Envoy:
@@ -73,13 +79,19 @@ You can also download the APK file directly [from Foundation's GitHub repository
 
 ![Image](/assets/img/envoy-guide-images/51.webp)
 
+> If installing via APK, verify signatures and hashes from the release page to reduce supply‑chain and tampering risks.
+{: .prompt-warning }
+
 Once the application is open, select "Manage Passport".
 
 ![Image](/assets/img/envoy-guide-images/52.webp)
 
-Choose whether you want to activate the Tor connection to reinforce confidentiality, then press "Continue".
+Choose whether you want to activate the Tor connection, then press "Continue".
 
 ![Image](/assets/img/envoy-guide-images/53.webp)
+
+> Enabling Tor helps protect your network privacy when using Envoy.
+{: .prompt-tip }
 
 Choose "Connect an existing Passport" if your Passport is already configured, or "Set up a new Passport" if you're initializing your hardware wallet for the first time.
 
@@ -123,6 +135,9 @@ Then use your phone to scan the QR code displayed on your Passport.
 
 ![Image](/assets/img/envoy-guide-images/60.webp)
 
+> If the authenticity check fails, do not proceed — contact Foundation support. A compromised device can lead to fund loss.
+{: .prompt-danger }
+
 If the message "Your Passport is secure" appears, this confirms that your hardware wallet is genuine. You can now use it to secure a Bitcoin wallet.
 
 ![Image](/assets/img/envoy-guide-images/61.webp)
@@ -133,9 +148,12 @@ Confirm the test result on your Passport.
 
 ## Setting the PIN code
 
-Next comes the PIN code step. The PIN code unlocks your Passport. It therefore provides protection against unauthorized physical access. The PIN code is not involved in the derivation of your wallet's cryptographic keys. So even without access to the PIN code, possession of your 12- or 24-word mnemonic phrase will enable you to regain access to your bitcoins.
+Next comes the PIN code step. The PIN code unlocks your Passport. It therefore provides protection against unauthorized physical access.
 
 ![Image](/assets/img/envoy-guide-images/15.webp)
+
+> The PIN does not derive keys. With the mnemonic (and any passphrase), funds are recoverable even without the PIN.
+{: .prompt-info }
 
 We recommend choosing a PIN code that is as random as possible. Also, be sure to save this code in a separate place from where your Passport is stored (e.g. in a password manager).
 
@@ -169,7 +187,10 @@ To do this, use the MicroSD card included in your Passport box (or another one),
 
 ![Image](/assets/img/envoy-guide-images/21.webp)
 
-Before installing it on your device, we strongly advise you to check the authenticity and integrity of the downloaded firmware. If you need help with this, consult this [tutorial](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc).
+> Verify firmware signatures and hashes before installing; never install unverified firmware.
+{: .prompt-warning }
+
+Before installing it on your device, consult this [tutorial](https://byakugan.io/posts/gnupg-guide).
 
 ### With the Envoy application
 
@@ -209,6 +230,9 @@ Once the update is complete, enter your PIN code to unlock the device and contin
 
 ![Image](/assets/img/envoy-guide-images/26.webp)
 
+> If you already have a wallet on Passport, ensure your mnemonic (and any passphrase) is backed up and tested before updating — a failed update without backups can mean permanent loss.
+{: .prompt-danger }
+
 ## Create a new Bitcoin wallet
 
 Now it's time to create a new Bitcoin wallet. Click on the confirmation button.
@@ -227,11 +251,12 @@ Click on "Continue".
 
 ![Image](/assets/img/envoy-guide-images/30.webp)
 
-Your Passport will now generate your "Backup Code". This is a series of numbers that can be used to decrypt a backup of your wallet stored on a MicroSD. This backup system, specific to Foundation devices, constitutes an additional backup to your mnemonic phrase, but is not compatible with other Bitcoin software.
-
-If you decide to use this "Backup Code", be sure to keep it in a different location from your MicroSD containing the encrypted backup of your wallet. You may, however, choose not to use this system if you feel that a good backup of your mnemonic phrase is sufficient.
+Your Passport will now generate your "Backup Code". This is a series of numbers that can be used to decrypt a backup of your wallet stored on a MicroSD. This backup system, specific to Foundation devices, constitutes an additional backup to your mnemonic phrase.
 
 ![Image](/assets/img/envoy-guide-images/31.webp)
+
+> The Backup Code is device‑specific and not compatible with other wallet software; store it separately from the MicroSD containing the encrypted backup.
+{: .prompt-warning }
 
 Enter your "Backup Code" to confirm that you have saved it correctly.
 
@@ -241,7 +266,10 @@ If a MicroSD has been inserted, the encrypted backup of your wallet has been sav
 
 ![Image](/assets/img/envoy-guide-images/33.webp)
 
-Your Passport will display your 12-word mnemonic phrase. This mnemonic gives you full, unrestricted access to all your bitcoins. Anyone in possession of this phrase can steal your funds, even without physical access to your Passport.
+Your Passport will display your 12-word mnemonic phrase.
+
+> Your mnemonic grants full, unrestricted access to your bitcoin. Never digitize it (no photos, files, cloud). Anyone with the words can steal your funds.
+{: .prompt-danger }
 
 The 12-word phrase restores access to your bitcoins in the event of loss, theft or breakage of your Passport. It is therefore very important to save it carefully and store it in a secure location.
 
@@ -284,6 +312,9 @@ Use your Passport to scan the address displayed on Envoy.
 Your Passport will confirm whether the wallet imported on Envoy is valid. Confirm it in the application.
 
 ![Image](/assets/img/envoy-guide-images/70.webp)
+
+> Always validate receive addresses on Passport before using them; wrong addresses mean irreversible loss.
+{: .prompt-warning }
 
 You can now access your wallet's public information on Envoy, but to spend bitcoins, you'll need to use your Passport.
 
@@ -349,9 +380,12 @@ In "Advanced", you can view the words of your mnemonic phrase, perform actions o
 
 ![Image](/assets/img/envoy-guide-images/47.webp)
 
-You can activate "Security Words", a feature that adds a layer of security by displaying two specific words when unlocking the device after entering the first four digits of the PIN code. These words, to be saved during configuration, ensure that the Passport has not been replaced or tampered with. In the event of any discrepancy at a later date, we advise you not to use the device. I advise you to activate this option to prevent most risks of physical compromise of the device.
+You can activate "Security Words", a feature that adds a layer of security by displaying two specific words when unlocking the device after entering the first four digits of the PIN code. These words, to be saved during configuration, ensure that the Passport has not been replaced or tampered with.
 
 ![Image](/assets/img/envoy-guide-images/48.webp)
+
+> Enable Security Words and verify them on each unlock. If they ever differ from your saved words, stop using the device.
+{: .prompt-warning }
 
 Finally, the "Extensions" sub-menu lets you activate functions specific to certain uses of the appliance, such as the Whirlpool coinjoin protocol.
 
@@ -428,6 +462,9 @@ Check the exchange address. In my example, there is none, as the transaction inc
 Make sure the fee is the one you have chosen.
 
 ![Image](/assets/img/envoy-guide-images/88.webp)
+
+> Before signing, verify on Passport the destination address, change address (if present), amount, and fee. A wrong output cannot be reversed.
+{: .prompt-warning }
 
 If all the information is correct, click on the confirmation button to sign the transaction.
 

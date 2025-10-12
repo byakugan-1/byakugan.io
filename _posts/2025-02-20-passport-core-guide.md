@@ -1,11 +1,11 @@
 ---
-title: Passport Core Guide
+title: Passport Core Guide (Sparrow)
 date: 2025-02-20 12:30:00 +0000
 categories: [Guide, Wallets]
 tags: [bitcoin,sparrow,security,wallets,hardware,foundation passport]     # TAG names should always be lowercase
 description: How to Setup and Use the Passport Core By Foundation Devices
 # comments: false
-author: loicpandul
+authors: [loicpandul, vibrant]
 ---
 
 ![Image](/assets/img/passport-core-guide-images/cover.webp)
@@ -20,7 +20,7 @@ As for connectivity, the Passport is equipped with a MicroSD port, a USB-C port 
 
 In terms of security, the Passport incorporates a secure element, and the device's source code is entirely open-source. It offers all the features expected of a good Bitcoin hardware wallet. Note that the Passport does not yet support miniscript, but this feature is planned for the second quarter of 2025.
 
-Priced at $199, the Passport is positioned as a high-end hardware wallet, competing with the Coldcard Q, Jade Plus, Tezor Safe 5 and Ledger's top-of-the-range models.
+Priced at USD 199, the Passport is positioned as a high-end hardware wallet, competing with the Coldcard Q, Jade Plus, Tezor Safe 5 and Ledger's top-of-the-range models.
 
 ![Image](/assets/img/passport-core-guide-images/01.webp)
 
@@ -33,6 +33,9 @@ If you're a beginner, the easiest option is to use your Passport with the native
 When you receive your Passport, make sure the box and seal on the carton are intact to confirm that the package has not been opened. A software verification of the device's authenticity and integrity will also be carried out when it is set up.
 
 ![Image](/assets/img/passport-core-guide-images/02.webp)
+
+> If the box or seal shows signs of tampering, stop setup and contact the seller to avoid using a compromised device.
+{: .prompt-danger }
 
 Box contents include :
 
@@ -105,11 +108,17 @@ Confirm the test result on your Passport.
 
 ![Image](/assets/img/passport-core-guide-images/14.webp)
 
+> If validation fails, do not proceed — contact Foundation support. A compromised device can lead to fund loss.
+{: .prompt-danger }
+
 ## Setting the PIN code
 
-Next comes the PIN code step. The PIN code unlocks your Passport. It therefore provides protection against unauthorized physical access. The PIN code is not involved in the derivation of your wallet's cryptographic keys. So even without access to the PIN code, possession of your 12- or 24-word mnemonic phrase will enable you to regain access to your bitcoins.
+Next comes the PIN code step. The PIN code unlocks your Passport. It therefore provides protection against unauthorized physical access.
 
 ![Image](/assets/img/passport-core-guide-images/15.webp)
+
+> The PIN does not derive keys. With the mnemonic (and any passphrase), funds are recoverable even without the PIN.
+{: .prompt-info }
 
 We recommend choosing a PIN code that is as random as possible. Also, be sure to save this code in a separate place from where your Passport is stored (e.g. in a password manager).
 
@@ -141,7 +150,10 @@ To do this, use the MicroSD card included in your Passport box (or another one),
 
 ![Image](/assets/img/passport-core-guide-images/21.webp)
 
-Before installing it on your device, we strongly advise you to check the authenticity and integrity of the downloaded firmware. If you need help with this, consult this [tutorial](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc).
+> Verify firmware signatures and hashes before installing; never install unverified firmware.
+{: .prompt-warning }
+
+Before installing it on your device, we strongly advise you to check the authenticity and integrity of the downloaded firmware. If you need help with this, consult this [tutorial](https://byakugan.io/posts/gnupg-guide).
 
 After checking the `.bin` file, place it on your MicroSD, then insert it into the Passport. The Passport file explorer will open. Select the file `vN.N.N-passport.bin`.
 
@@ -162,6 +174,9 @@ Please wait for the update to complete.
 Once the update is complete, enter your PIN code to unlock the device and continue configuration.
 
 ![Image](/assets/img/passport-core-guide-images/26.webp)
+
+> If you already have a wallet on Passport, ensure your mnemonic (and any passphrase) is backed up and tested before updating — a failed update without backups can mean permanent loss.
+{: .prompt-danger }
 
 ## Create a new Bitcoin wallet
 
@@ -187,6 +202,9 @@ If you decide to use this "*Backup Code*", be sure to keep it in a different loc
 
 ![Image](/assets/img/passport-core-guide-images/31.webp)
 
+> The Backup Code is device‑specific and not compatible with other wallet software; store it separately from the MicroSD containing the encrypted backup.
+{: .prompt-warning }
+
 Enter your "*Backup Code*" to confirm that you have saved it correctly.
 
 ![Image](/assets/img/passport-core-guide-images/32.webp)
@@ -195,7 +213,10 @@ If a MicroSD has been inserted, the encrypted backup of your wallet has been sav
 
 ![Image](/assets/img/passport-core-guide-images/33.webp)
 
-Your Passport will display your 12-word mnemonic phrase. This mnemonic gives you full, unrestricted access to all your bitcoins. Anyone in possession of this phrase can steal your funds, even without physical access to your Passport.
+Your Passport will display your 12-word mnemonic phrase.
+
+> Your mnemonic grants full, unrestricted access to your bitcoin. Never digitize it (no photos, files, cloud). Anyone with the words can steal your funds.
+{: .prompt-danger }
 
 The 12-word phrase restores access to your bitcoins in the event of loss, theft or breakage of your Passport. It is therefore very important to save it carefully and store it in a secure location.
 
@@ -277,9 +298,12 @@ In "*Advanced*", you can view the words of your mnemonic phrase, perform actions
 
 ![Image](/assets/img/passport-core-guide-images/47.webp)
 
-You can activate "*Security Words*", a feature that adds a layer of security by displaying two specific words when unlocking the device after entering the first four digits of the PIN code. These words, to be saved during configuration, ensure that the Passport has not been replaced or tampered with. In the event of any discrepancy at a later date, we advise you not to use the device. I advise you to activate this option to prevent most risks of physical compromise of the device.
+You can activate "*Security Words*", a feature that adds a layer of security by displaying two specific words when unlocking the device after entering the first four digits of the PIN code. These words, to be saved during configuration, ensure that the Passport has not been replaced or tampered with.
 
 ![Image](/assets/img/passport-core-guide-images/48.webp)
+
+> Enable Security Words and verify them on each unlock. If they ever differ from your saved words, stop using the device.
+{: .prompt-warning }
 
 Finally, the "*Extensions*" sub-menu lets you activate functions specific to certain uses of the appliance, such as the Whirlpool coinjoin protocol.
 
@@ -305,13 +329,22 @@ It's therefore important, when configuring, to note down somewhere the master ke
 
 ![Image](/assets/img/passport-core-guide-images/52.webp)
 
+> Losing or mistyping your passphrase is unrecoverable and creates a different wallet. Back it up physically and test it.
+{: .prompt-warning }
+
 Each time you unlock your Passport, you'll need to return to this menu to enter your passphrase and apply it to your wallet. Passport does not save the passphrase.
 
 Each time you unlock, after writing down the passphrase, check on this confirmation screen that the fingerprint given is the same as the one you wrote down during configuration. If it is, your passphrase is correct and you are accessing the correct Bitcoin wallet. If it's not, you're on the wrong wallet and need to try again, taking care not to make any input errors.
 
+> Record the fingerprint for your passphrase‑applied wallet and verify it on each use to catch entry mistakes.
+{: .prompt-tip }
+
 Before you receive your first bitcoins on your wallet, **I strongly advise you to perform an empty recovery test**. Make a note of some reference information, such as your xpub or first receiving address, then delete your wallet on the Passport while it's still empty (`Settings -> Advanced -> Erase Passport`). Then try to restore your wallet using your paper backups of the mnemonic phrase and any passphrase. Check that the cookie information generated after the restore matches the one you originally wrote down. If it does, you can rest assured that your paper backups are reliable. To find out more about how to carry out a test recovery, please consult this other [tutorial](https://byakugan.io/posts/passphrases.md).
 
 ![Image](/assets/img/passport-core-guide-images/53.webp)
+
+> Do a test restore before depositing funds to ensure your backups can recover the same wallet (match xpub/fingerprint).
+{: .prompt-tip }
 
 ## Configuring the wallet on Sparrow Wallet
 
@@ -322,6 +355,9 @@ Start by downloading and installing Sparrow Wallet [from the official website](h
 ![Image](/assets/img/passport-core-guide-images/54.webp)
 
 Be sure to check the authenticity and integrity of the software before installation. If you don't know how to do this, please consult this [tutorial](https://planb.network/tutorials/computer-security/data/integrity-authenticity-21d0420a-be02-4663-94a3-8d487f23becc).
+
+> Verify Sparrow’s signature and hash before installing to reduce supply‑chain and tampering risks.
+{: .prompt-warning }
 
 Once Sparrow Wallet is open, click on the "*File*" tab, then on "*New Wallet*".
 
@@ -362,6 +398,9 @@ Your Passport will then generate dynamic QR codes. Use your computer's webcam to
 You should now see your xpub and your master key fingerprint, which should match the one shown on your Passport when you enter your passphrase. Click on the "*Apply*" button.
 
 ![Image](/assets/img/passport-core-guide-images/64.webp)
+
+> Verify Sparrow’s “Master fingerprint” matches the one shown on Passport; a mismatch indicates a different wallet.
+{: .prompt-warning }
 
 Set a strong password to secure access to your Sparrow Wallet. This password will protect your public keys, addresses, labels and transaction history from unauthorized access. It's a good idea to save this password in a password manager, so you don't forget it.
 
@@ -404,6 +443,9 @@ Click on "*Verify Address*", then scan the QR code displayed on Sparrow Wallet.
 Make sure that the address displayed on the Passport corresponds exactly to the one shown on Sparrow, and that "*Verified*" appears.
 
 ![Image](/assets/img/passport-core-guide-images/74.webp)
+
+> Always verify receive addresses on Passport before using them; wrong addresses mean irreversible loss.
+{: .prompt-warning }
 
 You can now use it to receive bitcoins. When the transaction is broadcast on the network, it will appear on Sparrow. Wait until you've received enough confirmations to consider the transaction definitive.
 
@@ -455,6 +497,9 @@ Make sure the fee is the one you have chosen.
 
 ![Image](/assets/img/passport-core-guide-images/86.webp)
 
+> Before signing, verify on Passport the destination address, change address (if present), amount, and fee. A wrong output cannot be reversed.
+{: .prompt-warning }
+
 If all the information is correct, click on the confirmation button to sign the transaction.
 
 ![Image](/assets/img/passport-core-guide-images/87.webp)
@@ -473,4 +518,4 @@ Your transaction has been broadcast and is awaiting confirmation.
 
 Congratulations, you now know how to configure and use Passport.
 
-Feel free to share this article on your social networks. Thanks for sharing! 
+Feel free to share this article on your social networks. Thanks for sharing!

@@ -5,7 +5,7 @@ categories: [Guide, Wallets]
 tags: [bitcoin,sparrow,security,wallets]     # TAG names should always be lowercase
 description: How to install, configure and use Sparrow Wallet
 # comments: false
-author: loicpandul
+authors: [loicpandul, vibrant]
 ---
 
 {% include embed/youtube.html id='yJpvfRl03Tw' %}
@@ -29,6 +29,9 @@ Go to [the official Sparrow Wallet download page](https://sparrowwallet.com/down
 
 ![Image](/assets/img/sparrow-guide-images/01.webp)
 
+> Download only from official release pages and verify signature and hash before installing to reduce supply‑chain and tampering risks.
+{: .prompt-warning }
+
 {% include embed/youtube.html id='MyDMvjGFdDE' %}
 {% include embed/youtube.html id='IThaolnDgSo' %}
 
@@ -45,6 +48,9 @@ To interact with the Bitcoin network and broadcast your transactions, Sparrow mu
 - 🔵 Connection via an Electrum server. If your Bitcoin node is equipped with Electrs, as is the case with node-in-a-box solutions such as Umbrel or Start9, you can connect to it remotely from Sparrow.
 
 **It is preferable to use a connection via Electrs or Bitcoin Core on your own node to reduce the need to trust a third party and optimize your confidentiality**
+
+> Public nodes learn your wallet activity and reduce privacy. Prefer your own Bitcoin Core or Electrum server, ideally over Tor.
+{: .prompt-warning }
 
 ### Connect to a public node 🟡
 
@@ -70,6 +76,9 @@ The second method of connecting to a Bitcoin node is to link Sparrow to a Bitcoi
 
 Please note that if you use a pruned Bitcoin Core node, you won't be able to restore a wallet containing transactions predating the locally stored blocks. However, for a new wallet created on Sparrow, this won't be a problem: your new transactions will be visible, even with a pruned node.
 
+> Pruned nodes cannot rescan beyond pruned blocks. Restoring old wallets may fail; use an unpruned node for full history.
+{: .prompt-info }
+
 On Sparrow, go to the "*Bitcoin Core*" tab.
 
 ![Image](/assets/img/sparrow-guide-images/07.webp)
@@ -92,10 +101,10 @@ Don't forget to restart the software after making these changes.
 
 Then return to Sparrow Wallet and enter the path to your cookie file, usually located in the same folder as `Bitcoin.conf`, depending on your operating system:
 
-| **macOS** | ~/Library/Application Support/Bitcoin |
+| macOS | ~/Library/Application Support/Bitcoin |
 | --- | --- |
-| **Windows** | %APPDATA%\Bitcoin |
-| **Linux** | ~/.Bitcoin |
+| Windows | %APPDATA%\Bitcoin |
+| Linux | ~/.Bitcoin |
 
 ![Image](/assets/img/sparrow-guide-images/09.webp)
 
@@ -117,10 +126,10 @@ server=1
 
 After editing the file, make sure you save it in the appropriate folder for your operating system:
 
-| **macOS** | ~/Library/Application Support/Bitcoin |
+| macOS | ~/Library/Application Support/Bitcoin |
 | --- | --- |
-| **Windows** | %APPDATA%\Bitcoin |
-| **Linux** | ~/.Bitcoin |
+| Windows | %APPDATA%\Bitcoin |
+| Linux | ~/.Bitcoin |
 
 This operation can also be performed via the Bitcoin-QT Interface graphical interface. Go to the "*Settings*" menu, then "*Options...*", and activate the "*Enable RPC server*" option by checking the corresponding box. If the `Bitcoin.conf` file doesn't exist, you can create it directly from this Interface by clicking on "*Open Configuration File*".
 
@@ -148,6 +157,9 @@ rpcpassword=my_password
 ```
 
 ![Image](/assets/img/sparrow-guide-images/14.webp)
+
+> Use a strong rpcpassword and restrict rpcallowip to your LAN. Never expose Bitcoin Core RPC to the public internet.
+{: .prompt-danger }
 
 After modifying and saving the file, restart the Bitcoin-QT software.
 
@@ -181,9 +193,15 @@ The connection is confirmed. If you close this window, a blue tick will appear i
 
 ![Image](/assets/img/sparrow-guide-images/20.webp)
 
+> Use your own Electrum server onion; third‑party servers can learn wallet activity and reduce privacy.
+{: .prompt-warning }
+
 ## Create a hot wallet
 
 Now that Sparrow Wallet is configured to communicate with the Bitcoin network, you're ready to create your first wallet. This section guides you through the creation of a hot wallet, i.e. a wallet whose private keys are stored on your computer. Since your computer is a complex machine connected to the Internet, it presents a very large attack surface. Consequently, a hot wallet should only be used for limited amounts of bitcoins. To store larger amounts, opt for a secure wallet with a Hardware Wallet. If this is what you're looking for, you can skip ahead to the next section.
+
+> Treat hot wallets as spending wallets only — keep limited amounts; use a Hardware Wallet for savings.
+{: .prompt-warning }
 
 To create a hot wallet, from the Sparrow Wallet home screen, click on the "*File*" tab and then on "*New Wallet*".
 
@@ -209,6 +227,9 @@ Click on the "*generate New*" button to generate your wallet's mnemonic phrase. 
 
 The 12-word phrase restores access to your bitcoins in the event of loss, theft or breakage of your computer. It is therefore very important to save it carefully and store it in a safe place.
 
+> Never digitize your seed (no photos, files, cloud). Anyone with the words can steal your funds — keep backups offline and private.
+{: .prompt-danger }
+
 You can inscribe it on paper or, for added security, engrave it on stainless steel to protect it from fire, flood or collapse. The choice of medium for your mnemonic will depend on your security strategy, but if you're using Sparrow as a warm spending wallet containing moderate amounts, paper should be sufficient.
 
 For more information on the proper way to save and manage your mnemonic phrase, I highly recommend following this other tutorial, especially if you're a beginner:
@@ -222,6 +243,9 @@ https://planb.network/tutorials/wallet/backup/backup-mnemonic-22c0ddfa-fb9f-4e3a
 You can also choose to add a passphrase BIP39 by clicking on the "*Use passphrase*" box. Warning: using a passphrase can be very useful, but if you don't understand how it works, it can be very risky. That's why I strongly advise you to read this short theoretical article on the subject:
 
 https://planb.network/tutorials/wallet/backup/passphrase-a26a0220-806c-44b4-af14-bafdeb1adce7
+
+> Losing or mistyping your passphrase is unrecoverable and creates a different wallet. Back it up physically and test it.
+{: .prompt-warning }
 
 Once you've saved your mnemonic and any passphrase to a physical medium, click on "*Confirm Backup*".
 
@@ -242,6 +266,9 @@ Click on "*Apply*" to finalize wallet creation.
 Set a strong password to secure access to your Sparrow wallet. It's a good idea to keep this password in a password manager, so you don't forget it. Note that this password plays no part in the derivation of your keys. It is only used to access your wallet via Sparrow Wallet. So, even without this password, your mnemonic phrase will suffice to access your bitcoins from any BIP39-compatible application.
 
 ![Image](/assets/img/sparrow-guide-images/31.webp)
+
+> The Sparrow password encrypts the local wallet file; it is not part of key derivation and cannot recover your seed.
+{: .prompt-info }
 
 Your hot wallet is now created. You can skip to the *Receiving Bitcoins* section of this tutorial if you don't plan to use a Hardware Wallet with Sparrow.
 
@@ -298,6 +325,9 @@ Set a strong password to secure access to your Sparrow wallet. This password wil
 
 ![Image](/assets/img/sparrow-guide-images/40.webp)
 
+> The Sparrow password protects local wallet data only; it does not secure your Hardware Wallet’s seed.
+{: .prompt-info }
+
 Your management wallet is now configured on Sparrow.
 
 ![Image](/assets/img/sparrow-guide-images/41.webp)
@@ -317,6 +347,9 @@ If you're using a hot wallet, the address displayed can be used immediately, eit
 If you're using a Hardware Wallet, it's very important to check the address on the device screen before using it. For wired devices, connect and unlock your Hardware Wallet, then in Sparrow, click on "*Display Address*". Make sure that the address displayed on your Hardware Wallet matches that shown on Sparrow.
 
 ![Image](/assets/img/sparrow-guide-images/44.webp)
+
+> Always verify receive addresses on your Hardware Wallet before using them; wrong addresses mean irreversible loss.
+{: .prompt-warning }
 
 For Hardware Wallet Air-Gap users, address verification varies according to device model. See the dedicated Plan ₿ Network tutorial for precise instructions.
 
@@ -380,6 +413,9 @@ On the next screen, the options vary according to the type of wallet you are usi
 
 On your Hardware Wallet, check the recipient's address, the amount sent and the charges. If everything is correct, proceed with the signature.
 
+> Before signing, verify on your Hardware Wallet the destination address, change address (if present), amount, and fee. A wrong output cannot be reversed.
+{: .prompt-warning }
+
 Once the transaction has been signed, it will reappear in Sparrow, ready to be broadcast on the Bitcoin network for subsequent inclusion in a block. If everything is correct, click on "*Broadcast Transaction*".
 
 ![Image](/assets/img/sparrow-guide-images/58.webp)
@@ -441,6 +477,4 @@ The "*Tools*" tab groups together several advanced tools, including :
 
 ![Image](/assets/img/sparrow-guide-images/67.webp)
 
-You now know all about Sparrow Wallet software, an excellent tool for managing your Bitcoin wallets on a daily basis.
-
-If you found this tutorial useful,feel free to share it on your social networks. Thank you very much! -- [Loïc](https://github.com/LoicPandul)
+You now know all about Sparrow Wallet software, an excellent tool for managing your Bitcoin wallets.

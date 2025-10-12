@@ -6,7 +6,7 @@ tags: [bitcoin,seedsigner,security]     # TAG names should always be lowercase
 tags: [bitcoin,seedsigner,security,sparrow,multi-sig]     # TAG names should always be lowercase
 description: This comprehensive how-to guide walks you through unboxing, setting up and signing bitcoin transactions with the air-gapped SeedSigner device.
 # comments: false
-author: econoalchemist
+authors: [econoalchemist, vibrant]
 ---
 
 ![cover](/assets/img/seedsigner-tutorial-images/01.webp)
@@ -39,11 +39,15 @@ The SeedSigner kit includes the following components:
 8. "Getting Started" instructions
 9. "Thank You" card
 
-The SeedSigner kit comes with most everything you will need to get started, the only pieces you will need to supply yourself are a MicroSD card of at least 4 GB capacity and a micro USB cable. Assembly required.
+> Bring a microSD card (≥ 4 GB) and a micro USB cable; assembly is required.
+{: .prompt-tip }
 
 ![Image](/assets/img/seedsigner-tutorial-images/04.webp)
 
 The included blank QR code/mnemonic phrase cards measure 64 millimeters (mm) by 89 mm. These cards feature 24 blank spaces for seed words on one side, along with a warning that reads: "Never enter seed words into a computer that connects to the internet." On the opposite side, there is a blank 29 by 29 QR code grid with room for the wallet fingerprint and some notes, along with a warning that reads: "Never scan seed QR into a computer that connects to the internet."
+
+> Never enter seed words or scan a seed QR into an internet‑connected device.
+{: .prompt-warning }
 
 ![Image](/assets/img/seedsigner-tutorial-images/05.webp)
 
@@ -59,7 +63,10 @@ You can set the SeedSigner kit aside for now while you prepare the software imag
 
 ## Software
 
-This section demonstrates how to download the SeedSigner image and flash it to your microSD card. You will need to supply your own microSD card that has at least a 4 GB capacity. Best practice is to test your hardware with the software image to make sure everything works prior to attempting assembly with the 3D-printed enclosure.
+This section demonstrates how to download the SeedSigner image and flash it to your microSD card. You will need to supply your own microSD card that has at least a 4 GB capacity.
+
+> Test the hardware with the flashed image before assembling the enclosure.
+{: .prompt-tip }
 
 ### Step One: Download
 
@@ -68,6 +75,9 @@ Navigate to the [SeedSigner GitHub repo](https://github.com/SeedSigner/seedsigne
 ![Image](/assets/img/seedsigner-tutorial-images/08.webp)
 
 Scroll to the bottom of that release section and click on the link to download the .zip file. If you would like to verify your download, click on the links to download the “.sha256” file and “.sig” file as well. Save these files in the same folder location.
+
+> Verify downloads (signature + hash) to reduce supply‑chain and tampering risks.
+{: .prompt-tip }
 
 ![Image](/assets/img/seedsigner-tutorial-images/09.webp)
 
@@ -114,6 +124,9 @@ If you did not take the extra step to certify the SeedSigner public key, then Kl
 
 Or if there has been some manipulation in the file you downloaded and it is not authentically signed by the SeedSigner key, Kleopatra will print the dialog in red. This is an invalid signature and you should not proceed with decompressing the .zip file.
 
+> If the signature is invalid (red dialog), do not decompress or install.
+{: .prompt-danger }
+
 ![Image](/assets/img/seedsigner-tutorial-images/16.webp)
 
 Now that you have verified the authenticity of the accompanying “.sha256” file, you can rest assured that the SHA-256 hash value contained within it is in fact the hash value that you should be able to independently generate on the accompanying .zip file. To generate hash values on files, you can use a convenient freeware hex editor tool called [HxD](https://mh-nexus.de/en/hxd/).
@@ -126,9 +139,10 @@ Now that you have verified the authenticity of the accompanying “.sha256” fi
 - Now you can open the SeedSigner “.sha256” file with a text editor like Notepad.
 - Compare the hash values between HxD and the SeedSigner file.
 
-![Image](/assets/img/seedsigner-tutorial-images/18.webp)
+> Matching SHA‑256 hashes confirm the download is authentic and unmodified.
+{: .prompt-info }
 
-After verifying the hash value, you know that the .zip file is authentic. If the hash values do not match, then do not decompress the .zip file. It is a good idea to close the .zip file from HxD at this point. You can skip ahead to “Step Three” now.
+![Image](/assets/img/seedsigner-tutorial-images/18.webp)
 
 ### Step Two, B: Verify — Linux
 
@@ -174,8 +188,6 @@ Again, making sure to use the version appropriate for you.
 
 ![Image](/assets/img/seedsigner-tutorial-images/21.webp)
 
-That's it, you're done verifying the .zip file you downloaded. You can now move on to flashing the image to the microSD card in the next step.
-
 ### Step Three: Flash
 
 Using a program like Balena Etcher makes flashing the SeedSigner image easy. Navigate to the [Balena Etcher website](https://www.balena.io/etcher/) where you can download the application appropriate for your operating system. Follow your system prompts to install. Make sure you have a microSD card at least 4 GB in size formatted and connected to your computer.
@@ -200,6 +212,9 @@ Click on the “Flash!” button and the flashing process should start automatic
 
 There are three stages of the flashing process: decompression, flashing and validation. Just let the software run through all the steps and do not disconnect the microSD card during this process. If you get any operating system prompts saying the drive needs to be formatted, just ignore them.
 
+> Do not disconnect the microSD card during flashing/validation; ignore OS format prompts.
+{: .prompt-warning }
+
 ![Image](/assets/img/seedsigner-tutorial-images/27.png)
 
 ![Image](/assets/img/seedsigner-tutorial-images/28.png)
@@ -216,7 +231,10 @@ You can close the Balena Etcher application. Safely eject the microSD card from 
 
 ## Hardware
 
-This section demonstrates how to test and assemble the SeedSigner kit and also provides details on what each component is and alternative places to purchase these components in case you do not want to purchase the whole kit from one vendor. Best practice is to test that your components power on and the SeedSigner software works prior to assembly. The enclosure and or components can be damaged if you attempt disassembly.
+This section demonstrates how to test and assemble the SeedSigner kit and also provides details on what each component is and alternative places to purchase these components in case you do not want to purchase the whole kit from one vendor.
+
+> Power on and test camera, display, and software before assembling — disassembly can damage parts.
+{: .prompt-warning }
 
 ### The Enclosure
 
@@ -294,6 +312,9 @@ If you do not want to get the complete kit, you can buy a standalone Waveshare L
 ### Testing
 
 Testing the hardware with the SeedSigner software is a good idea. If you assemble everything and then find out that something doesn't work, you can damage the components and/or enclosure trying to disassemble it.
+
+> Power on and test components before assembling; disassembly can damage the enclosure and parts.
+{: .prompt-warning }
 
 #### Step One: Release Camera Retainer
 
@@ -391,9 +412,11 @@ This really long random number is used in some clever cryptographic functions to
 
 If you want to learn more about the processes used with hierarchical deterministic wallets and mnemonic phrases, check out [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) and [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki).
 
-Your SeedSigner can communicate this number to you in the form of a list of English words or a QR code; both methods contain the same information, your master seed. Keep in mind that anyone who gains access to this master seed information can use it to re-create your Bitcoin wallet and take the bitcoin from it, so be sure to handle this information securely and privately.
+> Anyone who gains access to your seed (mnemonic or seed QR) can steal your bitcoin — keep it private and offline.
+{: .prompt-danger }
 
-You will have a couple of choices when creating a new seed: capture an image or roll some dice. Both processes involve randomness, which is a key element in creating a secure master seed that cannot be guessed. Best practice is to use a 256-bit number for your master seed which translates to a 24-word mnemonic; the 12-word mnemonics are made from 128 bits.
+> Prefer 24‑word (256‑bit) seeds for maximum entropy; 12‑word (128‑bit) is acceptable but offers less entropy.
+{: .prompt-tip }
 
 ### Method One: With Camera
 
@@ -437,6 +460,9 @@ Follow the directions in the next section, "Seed Backup," to see how to secure t
 
 The randomness of the dice rolls is pretty self explanatory, best practice is to use a balanced dice. The technical definition of entropy with a six-sided dice is calculated by “log2(6) = 2.58 bits of entropy,” this is why it takes 50 rolls for 128 bits or 99 rolls for 256 bits: “log2(6)*99 = 255.9.” By rolling a dice 99 times, you are providing the randomness necessary to create a random number that is impossible to guess. The dice method will give you a choice between 128 bits/50 rolls/12 words or 256 bits/99 rolls/24 words.
 
+> Use a balanced die; 50 rolls ≈128‑bit entropy (12 words), 99 rolls ≈256‑bit entropy (24 words).
+{: .prompt-info }
+
 #### Step One: Initiate Dice Entry
 
 From the SeedSigner main menu, navigate to “Seeds” then “+ Create a seed” then “‘dice icon’ New seed.” Then select which mnemonic length you want to use, 12 words or 24 words. Accept the warning telling you that this information needs to remain private and secure.
@@ -473,6 +499,9 @@ Each of the 2,048 words on the BIP39 list corresponds to a different numeric val
 
 SeedSigner can calculate this checksum for you and tell you what the 12th or 24th word is based on the rest of the proceeding mnemonic. This may be helpful if you have a mnemonic phrase that is missing the last word, or if you want to double check a mnemonic, or if you want to pick your own words from the BIP39 list. However, picking your own words from the BIP39 list will probably not be as random as using the random number generator found in tools like the SeedSigner.
 
+> Picking your own words from the BIP39 list is usually less random — prefer camera or dice entropy.
+{: .prompt-warning }
+
 From the main menu navigate to “Seeds” then “+ Create a seed” then “Calc 12th/24th word” then select mnemonic length “12 words” or “24 words.”
 
 ![Image](/assets/img/seedsigner-tutorial-images/75.png)
@@ -497,6 +526,9 @@ After the 11th or 23rd word has been entered, the SeedSigner will display the fi
 
 You can also import a pre-existing 12-word or 24-word mnemonic in its entirety. From the main menu, navigate to “Seeds” then select “Enter 24-word seed” or “Enter 12-word seed.” Then follow the same process above, selecting the first letter of each word until you find the desired word and pressing “KEY2” on the HAT display to select that word. If you enter a word incorrectly, the calculated checksum will be incorrect and the SeedSigner will alert you.
 
+> If the checksum fails, a word was entered incorrectly — review and correct before proceeding.
+{: .prompt-warning }
+
 ![Image](/assets/img/seedsigner-tutorial-images/82.png)
 
 ![Image](/assets/img/seedsigner-tutorial-images/83.png)
@@ -511,13 +543,19 @@ Once all the words have been entered you will be presented with the wallet finge
 
 ## Seed Backup
 
-This section will demonstrate how to backup the master seed generated on the SeedSigner. There are two ways to backup this information: as a mnemonic phrase or as a QR code. A combination of these two methods can be used for redundant backups. Anyone who gains access to this information will be able to steal your bitcoin, so ensure that you take precautions when handling this information. Some basic best practices are to never store this information in a text file, don't save it to a computer, don't take a picture of it and don't speak the words out loud. Handle this information as if it were gold, cash or jewelry.
+This section will demonstrate how to backup the master seed generated on the SeedSigner. There are two ways to backup this information: as a mnemonic phrase or as a QR code. A combination of these two methods can be used for redundant backups.
+
+> Do not digitize seed backups (no photos, files, or cloud storage) — treat them like gold or cash.
+{: .prompt-warning }
 
 Both the mnemonic phrase and the QR code can be transcribed visually from the SeedSigner display without having to connect the SeedSigner to any device to transfer the information. This keeps the SeedSigner completely air gaped while exporting the master seed. The information can be transcribed to an included paper card or to a stainless steel QR code plate, available from [Vulcan21](https://vulcan21.com/steelqr/).
 
 Paper cards can be quick and easy to fill out, hidden in many different places and easily distributed to different geographic locations. Steel plates can take more time to set up, they may not be as easily concealable, but the steel plates will withstand extreme environmental conditions like fire and flooding; they are much more robust than paper.
 
-After you generate a new seed on your SeedSigner, either by taking an image or by completing dice rolls, the SeedSigner will direct you to the mnemonic phrase. The mnemonic phrase will be a list of either 12 or 24 English words. If you need to display the mnemonic phrase again after your seed has already been created you can scan in your QR code and navigate to “Backup Seed” then “View Seed Words” then accept the warning and then the list of 12 or 24 words will be displayed. If you did not write down your mnemonic phrase or transcribe your QR code when initially creating your master seed and you have cycled the power on your SeedSigner, then you will need to create a new seed as there is no way for the SeedSigner to store that information in memory. Never deposit any bitcoin to a wallet until you have verified the backup information works to restore the wallet.
+After you generate a new seed on your SeedSigner, either by taking an image or by completing dice rolls, the SeedSigner will direct you to the mnemonic phrase. The mnemonic phrase will be a list of either 12 or 24 English words. If you need to display the mnemonic phrase again after your seed has already been created you can scan in your QR code and navigate to “Backup Seed” then “View Seed Words” then accept the warning and then the list of 12 or 24 words will be displayed. If you did not write down your mnemonic phrase or transcribe your QR code when initially creating your master seed and you have cycled the power on your SeedSigner, then you will need to create a new seed as there is no way for the SeedSigner to store that information in memory.
+
+> Before depositing bitcoin, perform a test restore to verify your backups can recover the wallet.
+{: .prompt-tip }
 
 ### Note Card
 
@@ -526,6 +564,9 @@ When you create a new seed, SeedSigner will direct you to the list of 12 or 24 w
 ![Image](/assets/img/seedsigner-tutorial-images/87.webp)
 
 Select “Done” when finished and the SeedSigner will prompt you to test yourself on your backup, it is best practice to take this test to ensure your backup was written down correctly. On the reverse side of the note card is a blank 29 by 29 QR code grid. You can visually transcribe your master seed in QR code format onto the note card. This makes importing your wallet into SeedSigner as fast as scanning a QR code can be. After taking the test to confirm the mnemonic phrase, you can scroll down the menu on your SeedSigner to “Backup Seed” then “Export as SeedQR” then “I Understand” then “Begin 29x29.”
+
+> Take the built‑in backup test; then transcribe SeedQR carefully and verify by scanning.
+{: .prompt-tip }
 
 ![Image](/assets/img/seedsigner-tutorial-images/87.png)
 
@@ -549,7 +590,13 @@ Once you have the QR code transcribed, test it by scanning it and checking the f
 
 If you are using a passphrase on your wallet, you will need to decide how you want to handle this added piece of information. A passphrase can be thought of as a 13th or 25th word added to your mnemonic phrase; this will create a completely different wallet. A passphrase can be a string of any combination of uppercase letters, lowercase letters, numbers and special characters. Only you will know this passphrase and there is no way for the SeedSigner or anyone to help you recover a lost or forgotten passphrase. By entering a passphrase on your wallet, this added piece of information will be required each time you want to access this wallet in the future.
 
+> Store your passphrase separately from your seed backup; losing it is unrecoverable and locks you out permanently.
+{: .prompt-danger }
+
 There is a tool maintained by [@BitcoinQ_A](https://twitter.com/BitcoinQ_A) that can assist you in trying different passphrases over a mnemonic phrase in case you write down the passphrase incorrectly but have a rough idea of what it should be. You can enter your mnemonic words and a receiving address and test different passphrases. Use this tool offline by downloading it, do not enter your mnemonic phrase or passphrase into a network-connected device.
+
+> Use passphrase‑testing tools strictly offline; never input secrets into a network‑connected device.
+{: .prompt-warning }
 
 Visit [Bitcoiner.Guide/seed/](https://bitcoiner.guide/seed/) to learn more.
 
@@ -580,6 +627,9 @@ If you make a mistake, you can remove the permanent marker with acetone and a Q-
 ![Image](/assets/img/seedsigner-tutorial-images/100.webp)
 
 Prior to stamping the dots with a punch, test the QR code with the SeedSigner.
+
+> Test the SeedQR by scanning before committing punches to steel; adjust markings if needed.
+{: .prompt-tip }
 
 ![Image](/assets/img/seedsigner-tutorial-images/101.png)
 
@@ -691,6 +741,9 @@ In the pop-up window, scroll down and select “SeedSigner” then “Scan” to
 
 You will receive a warning about privacy implications of exporting your xpub, then you will have a chance to review the details. Once you select “Export Xpub” the series of animated QR codes will begin and you can hold your SeedSigner up to your PC webcam so that Sparrow Wallet can gather the details it needs to import your watch-only wallet.
 
+> Exporting an xpub can reveal wallet structure to external systems; consider privacy impacts.
+{: .prompt-warning }
+
 ![Image](/assets/img/seedsigner-tutorial-images/131.png)
 
 ![Image](/assets/img/seedsigner-tutorial-images/132.png)
@@ -701,11 +754,17 @@ You will receive a warning about privacy implications of exporting your xpub, th
 
 If you are having trouble with the brightness of the HAT display, you can hold the joystick in the up or down position during the animated QR code loop to change the brightness of the screen. There are right brightness levels from very dim to very bright.
 
+> Adjust QR brightness by holding the joystick up/down during the animated QR loop.
+{: .prompt-tip }
+
 ![Image](/assets/img/seedsigner-tutorial-images/135.webp)
 
 ### Step Four: Finalize Import
 
-Back in Sparrow Wallet, once you scan the animated QR codes, you can name your new wallet and add an optional password. Be careful not to confuse this password with your passphrase. This password in Sparrow Wallet is just to encrypt the wallet file on your PC.
+Back in Sparrow Wallet, once you scan the animated QR codes, you can name your new wallet and add an optional password.
+
+> The Sparrow wallet password encrypts the local file; it is not your wallet passphrase.
+{: .prompt-info }
 
 ![Image](/assets/img/seedsigner-tutorial-images/136.png)
 
@@ -801,7 +860,10 @@ Once your transaction is broadcast to the Bitcoin network, then you can use your
 
 ### Importing Private Key
 
-As of Sparrow Wallet version 1.6.4, you can scan your private key QR code and import to Sparrow Wallet. If you are trying to keep your wallet air gapped, then do not attempt this as it will put your private key on a device that is either currently connected to the internet or has been/will be connected to the internet. The risk here is that you could be turning your cold wallet into a hot wallet.
+As of Sparrow Wallet version 1.6.4, you can scan your private key QR code and import to Sparrow Wallet. If you are trying to keep your wallet air gapped, then do not attempt this as it will put your private key on a device that is either currently connected to the internet or has been/will be connected to the internet.
+
+> Importing a private key into Sparrow stores it on your PC — it can convert a cold wallet to a hot wallet and increase risk.
+{: .prompt-danger }
 
 By following the steps below, Sparrow Wallet will write a wallet file to your PC. This wallet file will contain your private key. If your computer is compromised in the future and this file is found then your bitcoin could be at risk. Using a password to encrypt this wallet file is a minimum-recommended precaution if you choose to proceed. A passphrase will not be stored in the wallet file and this is another safeguard you can use to help protect your bitcoin in the event that your private key is exposed. Importing a private key can be useful for quickly generating your wallet, constructing a transaction and broadcasting it without having to pass details back and forth to the SeedSigner if you find yourself in a situation where time is of the essence and your signing device is unavailable to you.
 

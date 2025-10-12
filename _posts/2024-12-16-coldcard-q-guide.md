@@ -42,7 +42,7 @@ In terms of hardware, the COLDCARD Q is equipped with all the features required 
 - Two Secure Elements from two different manufacturers for added security
 - The ability to communicate via NFC
 
-In my opinion, the COLDCARD Q has only two drawbacks. Firstly, because of its many features, it's quite bulky, measuring almost 13 cm long and 8 cm wide, which is almost the size of a small smartphone. It's also rather thick because of the battery compartment. If you're looking for a smaller, more mobile hardware wallet, the much more compact MK4 might be a better option. The second drawback is obviously the cost of the device, which is priced at USD 239.99 on the official website, i.e. USD 72 more than the MK4, which puts the Q in direct competition with premium hardware wallets like the Ledger Flex or Foundation's Passport.
+In my opinion, the COLDCARD Q has a few drawbacks. Firstly, the coldcard is not truly FOSS (Free and Open Source Software) unlike the [Foundation Passport](https://foundation.xyz/passport-core/). Secondly, because of its many features, it's quite bulky, measuring almost 13 cm long and 8 cm wide, which is almost the size of a small smartphone. It's also rather thick because of the battery compartment. If you're looking for a smaller, more mobile hardware wallet, the much more compact MK4 might be a better option. Another drawback is obviously the cost of the device, which is priced at USD 239.99 on the official website, i.e. USD 72 more than the MK4, which puts the Q in direct competition with premium hardware wallets like the Ledger Flex or Foundation's Passport.
 
 ![Image](/assets/img/coldcardq-guide-images/001.webp)
 
@@ -63,9 +63,12 @@ The COLDCARD Q is available for sale [on the official Coinkite website](https://
 
 ## Preparing the tutorial
 
-Once you've received your COLDCARD, the first step is to inspect the packaging to make sure it hasn't been opened. If the packaging is damaged, this may indicate that the hardware wallet has been compromised and may not be genuine.
+Once you've received your COLDCARD, the first step is to inspect the packaging to make sure it hasn't been opened.
 
 ![Image](/assets/img/coldcardq-guide-images/002.webp)
+
+> Damaged or previously opened packaging may indicate tampering or a counterfeit device — stop and contact the seller.
+{: .prompt-danger }
 
 When you open the box, you should find the following items:
 
@@ -74,15 +77,19 @@ When you open the box, you should find the following items:
 
 ![Image](/assets/img/coldcardq-guide-images/003.webp)
 
-Make sure the bag has not been unsealed or damaged. Also check that the number on your bag matches the number on the paper inside the bag. Keep this number for future reference.
-
 ![Image](/assets/img/coldcardq-guide-images/004.webp)
+
+> Verify the bag is sealed and undamaged, confirm the bag’s number matches the card inside, and retain this number for future checks.
+{: .prompt-warning }
 
 If you prefer to power your COLDCARD without connecting it to a computer (air-gap), insert three AAA batteries into the back of the device. Alternatively, you can connect it to your computer via a USB-C cable.
 
 ![Image](/assets/img/coldcardq-guide-images/005.webp)
 
-For this tutorial, you'll also need Sparrow Wallet to manage your Bitcoin wallet on your computer. Download [Sparrow Wallet](https://sparrowwallet.com/download/) from the official website. I strongly advise you to check both its authenticity (with GnuPG) and integrity (via hash) before proceeding with the installation. If you don't know how to do this, follow this [tutorial](https://byakugan.io/posts/gnupg-guide).
+For this tutorial, you'll also need Sparrow Wallet to manage your Bitcoin wallet on your computer. Download [Sparrow Wallet](https://sparrowwallet.com/download/) from the official website. If you don't know how to do this, follow this [tutorial](https://byakugan.io/posts/gnupg-guide).
+
+> Verify Sparrow’s signature and hash before installing to reduce supply‑chain and tampering risks.
+{: .prompt-warning }
 
 ## PIN code selection
 
@@ -104,7 +111,10 @@ Navigate to the "Choose PIN Code" menu and confirm with the "ENTER" button.
 
 This PIN code is used to unlock your COLDCARD. It is therefore a protection against unauthorized physical access. This PIN code is not involved in the derivation of your wallet's cryptographic keys. So, even without access to this PIN code, possession of your mnemonic phrase will enable you to regain access to your bitcoins.
 
-COLDCARD PIN codes are divided into two parts: a prefix and a suffix, each of which can contain between 2 and 6 digits, for a total of 4 to 12 digits. When you unlock your COLDCARD, you'll first need to enter the prefix, after which the device will show you 2 words. Then enter the suffix. These two words will be given to you during this configuration step, and should be carefully saved, as you'll need them every time you unlock your COLDCARD. If the two words displayed during unlocking match those you saved during configuration, this will confirm that your device has not been compromised since its last use.
+COLDCARD PIN codes are divided into two parts: a prefix and a suffix, each of which can contain between 2 and 6 digits, for a total of 4 to 12 digits. When you unlock your COLDCARD, you'll first need to enter the prefix, after which the device will show you 2 words. Then enter the suffix. These two words will be given to you during this configuration step, and should be carefully saved, as you'll need them every time you unlock your COLDCARD.
+
+> Always verify the two anti‑phishing words after entering your PIN prefix; if they differ from your saved words, stop and investigate.
+{: .prompt-warning }
 
 Click again on "Choose PIN"
 
@@ -132,15 +142,14 @@ Confirm your PIN by entering it a second time, checking that the two anti-phishi
 
 ![Image](/assets/img/coldcardq-guide-images/015.webp)
 
-From now on, each time you unlock your COLDCARD, remember to check the validity of the two anti-phishing words that appear on the screen after you enter your PIN code prefix.
-
 ## Firmware update
 
 When using your device for the first time, it is important to check and update the firmware. To do this, access the "Advanced/Tools" menu.
 
 ![Image](/assets/img/coldcardq-guide-images/016.webp)
 
-Important: If you are planning to upgrade your firmware and this is not your first time using COLDCARD (i.e. you already have a wallet created on COLDCARD), make sure you have your mnemonic phrase and that it is functional (as well as the optional passphrase, if applicable). This is important to avoid losing your bitcoins in the event of a problem during the device update.
+> If you already have a wallet on the device, ensure your mnemonic (and any passphrase) is backed up and tested before updating — a failed update without backups can mean permanent loss.
+{: .prompt-danger }
 
 Select "Upgrade Firmware".
 
@@ -158,9 +167,12 @@ Check [on the official COLDCARD website](https://coldcard.com/downloads) to see 
 
 ![Image](/assets/img/coldcardq-guide-images/020.webp)
 
-At this point, we strongly recommend checking the integrity and authenticity of the downloaded firmware. To do this, download [the document containing the hashes of all versions, signed by the developers](https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt), verify the signature with [the developer's public key](https://keybase.io/dochex), and make sure that the hash indicated in the signed document matches that of the firmware downloaded from the site. If everything is correct, you can proceed with the update.
+At this point, download [the document containing the hashes of all versions, signed by the developers](https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt), verify the signature with [the developer's public key](https://keybase.io/dochex), and make sure that the hash indicated in the signed document matches that of the firmware downloaded from the site. If everything is correct, you can proceed with the update.
 
 If you are not familiar with this verification process, I recommend you follow this [tutorial](https://byakugan.io/posts/gnupg-guide).
+
+> Verify firmware signatures and hashes; never install unverified firmware.
+{: .prompt-warning }
 
 Take a microSD card and transfer the firmware file (document in .dfu) to it. Insert the microSD card into one of your COLDCARD's ports.
 
@@ -232,7 +244,8 @@ This will take you to a page where you can add entropy by rolling the dice. Make
 
 A new mnemonic phrase will be displayed, based on the entropy you've just provided and that of the TRNG.
 
-Warning: This mnemonic gives full, unrestricted access to all your bitcoins. Anyone in possession of this phrase can steal your funds, even without physical access to your COLDCARD. The 12-word phrase restores access to your bitcoins in the event of loss, theft or breakage of your COLDCARD. It is therefore very important to save it carefully and store it in a secure place.
+> Your 12 words grant full, unrestricted access to your bitcoin. Never digitize them (no photos, files, cloud). Anyone with the words can steal your funds.
+{: .prompt-danger }
 
 You can write it down on the cardboard supplied with your COLDCARD, or for added security, I recommend that you engrave it on a stainless steel support to protect it from the risk of fire, flood or collapse. In any case, never save it on a digital medium, otherwise you could lose your bitcoins.
 
@@ -288,7 +301,8 @@ Launch Sparrow Wallet and skip the introductory pages to reach the main screen. 
 
 ![Image](/assets/img/coldcardq-guide-images/043.webp)
 
-It's strongly recommended that you use your own Bitcoin node. For this tutorial, I'm using a public node (yellow), as I'm on the testnet, but for production use, it's best to use Bitcoin Core locally (green) or an Electrum server on a remote node (blue).
+> Prefer your own node (Bitcoin Core locally or your Electrum server). Public nodes reduce privacy and add trust assumptions.
+{: .prompt-warning }
 
 Access the "File" menu and select "New Wallet".
 
@@ -310,9 +324,12 @@ Under the "Coldcard" tab, click on "Scan..." if you plan to scan the QR code dis
 
 ![Image](/assets/img/coldcardq-guide-images/048.webp)
 
-After import, check that the "Master fingerprint" displayed on Sparrow matches the one displayed on your COLDCARD. Confirm the creation by clicking on "Apply".
+After import, confirm the creation by clicking on "Apply".
 
 ![Image](/assets/img/coldcardq-guide-images/049.webp)
+
+> Verify Sparrow’s “Master fingerprint” matches the one shown on COLDCARD; a mismatch indicates a different wallet.
+{: .prompt-warning }
 
 Set up a strong password to secure access to your Sparrow Wallet. This password will protect your public keys, addresses, tags and transaction history from unauthorized access.
 
@@ -328,6 +345,9 @@ Before you receive your first bitcoins in your wallet, I strongly advise you to 
 
 To learn more about how to perform a recovery test, I suggest you consult this [tutorial](https://planb.network/tutorials/wallet/backup/recovery-test-5a75db51-a6a1-4338-a02a-164a8d91b895).
 
+> Do a test restore before depositing funds to ensure your backups can recover the same wallet (match xpub/fingerprint).
+{: .prompt-tip }
+
 ## Receive bitcoins
 
 To receive your first bitcoins, start by switching on and unlocking your COLDCARD.
@@ -339,6 +359,9 @@ On Sparrow Wallet, click on the "Receive" tab.
 ![Image](/assets/img/coldcardq-guide-images/053.webp)
 
 Before using the address proposed by Sparrow Wallet, check it on your COLDCARD screen. This practice allows you to confirm that the address displayed on Sparrow is not fraudulent, and that the hardware wallet does indeed hold the private key needed to subsequently spend the bitcoins secured with this address. This helps you to avoid several types of attack.
+
+> Always verify receive addresses on COLDCARD (Address Explorer or QR scan) before using them; wrong addresses mean irreversible loss.
+{: .prompt-warning }
 
 To perform this check, click on the "Address Explorer" menu on the COLDCARD.
 
@@ -418,6 +441,9 @@ If everything is to your satisfaction, click on "Finalize Transaction for Signin
 
 ![Image](/assets/img/coldcardq-guide-images/071.webp)
 
+> Before signing, verify on COLDCARD the destination address, amount, and fee. A wrong address or amount cannot be reversed.
+{: .prompt-warning }
+
 Once you've built your transaction in Sparrow, it's time to sign it with your COLDCARD. To transmit the PSBT (unsigned transaction) to your device, you have several options. If wired data transmission is enabled, you can send the transaction directly via a USB-C connection, just as you would with any other hardware wallet. In this case, on Sparrow, you'd have to click on the "Sign" button in the bottom right-hand corner. In my example, this button is blocked because the COLDCARD is not connected by cable.
 
 ![Image](/assets/img/coldcardq-guide-images/072.webp)
@@ -482,11 +508,15 @@ In a previous tutorial, we covered the initial configuration of the COLDCARD Q a
 
 This expert section is dedicated to COLDCARD Q's advanced options, designed for advanced and paranoid users. COLDCARDs are distinguished from other hardware wallets by their many advanced security features. Of course, you don't have to use all these options. Just choose the ones that suit your security strategy.
 
-Warning: incorrect use of some of these advanced options may result in the loss of your bitcoins or the destruction of your hardware wallet. Read the advice and explanations for each option carefully.
+> Misconfiguring advanced options can cause fund loss or permanently destroy your device. Proceed only with tested backups and clear understanding.
+{: .prompt-danger }
 
 Before you start, make sure you have access to a physical backup of your 12- or 24-word mnemonic phrase, and check its validity via the following menu: `Advanced/Tools > Danger Zone > Seed Functions > View Seed Words`.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/01.webp)
+
+> Verify your seed (and any passphrase) is correctly recorded and recoverable before changing critical settings.
+{: .prompt-tip }
 
 ### The BIP39 passphrase
 
@@ -497,19 +527,25 @@ Bear in mind that once you've set up the passphrase on your wallet, your mnemoni
 On COLDCARDs, you have two options for managing your passphrase:
 
 1. Classic entry: you enter the passphrase manually each time you use your hardware wallet, just as you do with other hardware wallets. COLDCARD Q simplifies this task with its full keyboard.
-2. Encrypt and store the passphrase on a microSD card: insert the microSD into the COLDCARD Q each time you use it. Note that this microSD will only work on your COLDCARD Q and is not a backup. It is therefore very important that you also keep a copy of your passphrase on a physical medium, such as paper or metal.
+2. Encrypt and store the passphrase on a microSD card: insert the microSD into the COLDCARD Q each time you use it.
+
+> A stored passphrase on microSD is convenience, not a backup. Always maintain a separate physical backup; losing the passphrase locks you out permanently.
+{: .prompt-warning }
 
 To set your BIP39 passphrase, access the "Passphrase" menu.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/02.webp)
 
-Enter your passphrase using the keyboard. Be sure to choose a strong passphrase (long and random) and make a physical backup.
+Enter your passphrase using the keyboard.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/03.webp)
 
 Once you've set your passphrase, COLDCARD Q will show you the master key fingerprint of the new wallet associated with this passphrase. Be sure to save this fingerprint. When you re-enter your passphrase when you use your device in the future, you'll be able to check that the fingerprint displayed matches the one you saved. This check ensures that you haven't made a mistake when entering your passphrase.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/04.webp)
+
+> Record the fingerprint for your passphrase‑applied wallet and verify it on each use to catch entry mistakes.
+{: .prompt-tip }
 
 You can now press "ENTER" to apply this passphrase to your mnemonic phrase and activate the new wallet. If you prefer to save this passphrase on a microSD, insert the card in the appropriate slot and press "1".
 
@@ -559,11 +595,11 @@ Set the PIN code to be associated with the action and remember to save it.
 
 Then choose the action to be performed automatically each time you enter this Trick PIN. Here's the list of actions available for a PIN:
 
-- "Brick Self": destroys both COLDCARD Q chips if the Trick PIN is entered, rendering the device totally unusable. It will then be impossible to resell, reuse or even return it to Coinkite. The device will become irretrievably obsolete. This feature can be used in the event of a robbery to convince an assailant that he will never be able to access your bitcoins. Note: without a physical backup of your mnemonic phrase and any passphrase, your bitcoins will be permanently lost.
+- "Brick Self": destroys both COLDCARD Q chips if the Trick PIN is entered, rendering the device totally unusable. It will then be impossible to resell, reuse or even return it to Coinkite. The device will become irretrievably obsolete.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/14.webp)
 
-- "Wipe Seed": offers several actions for deleting the seed, i.e. resetting the COLDCARD without destroying it. Unlike the "Brick Self" option, it will be possible to reconfigure the device using a backup of your mnemonic phrase. However, without this backup, your bitcoins will be lost. Options:
+- "Wipe Seed": offers several actions for deleting the seed, i.e. resetting the COLDCARD without destroying it. Unlike the "Brick Self" option, it will be possible to reconfigure the device using a backup of your mnemonic phrase. Options:
   - "Wipe & Reboot": removes the seed and reboots without displaying information
   - "Silent Wipe": silently wipes the seed and unlocks a random fake wallet
   - "Wipe -> Wallet": wipes discreetly and unlocks a pre-configured secondary bait wallet
@@ -575,10 +611,10 @@ Then choose the action to be performed automatically each time you enter this Tr
 
 ![Image](/assets/img/coldcardq-expert-guide-images/16.webp)
 
-- "Login Countdown": actions with a countdown before execution. Warning, some may destroy your device or result in the loss of your bitcoins:
-  - "Wipe & Countdown": clears the seed, starts a one-hour countdown; intended to fool an attacker
+- "Login Countdown": actions with a countdown before execution:
+  - "Wipe & Countdown": clears the seed, starts a one-hour countdown
   - "Countdown & Brick": starts a one-hour countdown, then destroys chips permanently
-  - "Just Countdown": a one-hour countdown, then restart; seed remains intact. Do not confuse with the Login Countdown option below, which delays normal unlocks.
+  - "Just Countdown": a one-hour countdown, then restart; seed remains intact
 
 ![Image](/assets/img/coldcardq-expert-guide-images/17.webp)
 
@@ -594,6 +630,9 @@ Then choose the action to be performed automatically each time you enter this Tr
 
 ![Image](/assets/img/coldcardq-expert-guide-images/20.webp)
 
+> Some Trick PIN actions permanently erase seeds or brick the device. Test carefully on a blank device and ensure backups before enabling.
+{: .prompt-danger }
+
 Once you have selected an action, confirm your choice.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/21.webp)
@@ -607,6 +646,9 @@ By selecting an existing Trick PIN, you can check the associated action. You can
 ![Image](/assets/img/coldcardq-expert-guide-images/23.webp)
 
 The "Add If Wrong" option lets you configure a specific action that is automatically triggered after a certain number of incorrect attempts to enter the master PIN code.
+
+> Delta Mode requires the Trick PIN to share the same prefix as the real PIN to keep anti‑phishing words identical; otherwise it reveals duress mode.
+{: .prompt-warning }
 
 #### Scramble Keys
 
@@ -647,6 +689,9 @@ Each unlock attempt prompts for PIN…
 At the end of the countdown, enter PIN again to access the device.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/31.webp)
+
+> Do not confuse Login Countdown (delays normal unlock) with Trick PIN “Countdown & Brick” (destroys device after countdown).
+{: .prompt-info }
 
 #### Calculator Login
 
@@ -693,6 +738,9 @@ Three levels:
    Precautions: remove batteries and unplug power, wait a few minutes, wear gloves and goggles.
 
 ![Image](/assets/img/coldcardq-expert-guide-images/39.webp)
+
+> Physical destruction is irreversible. Remove power, use protective gear, and never reconnect a drilled device.
+{: .prompt-danger }
 
 Once the chips have been punched, do not reconnect the device.
 
