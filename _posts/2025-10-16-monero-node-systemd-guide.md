@@ -1,6 +1,6 @@
 ---
 title: How to run a Monero Node
-date: 2025-10-12 12:30:00 +0000
+date: 2025-10-16 12:30:00 +0000
 categories: [Guide, Security]
 tags: [security,nodes,monero,server]     # TAG names should always be lowercase
 description: Learn to run a Monero node via Systemd
