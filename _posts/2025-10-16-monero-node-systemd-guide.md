@@ -200,30 +200,72 @@ chown monero:monero /usr/local/bin/monero*
 Create “/etc/monero/monerod.conf” (example):
 
 ```ini
-# Core locations
-data-dir=/var/lib/monero/bitmonero
+# /etc/monero/monerod.conf
+#
+# Configuration file for monerod. For all available options see the MoneroDocs:
+# https://docs.getmonero.org/interacting/monerod-reference/
+
+# Data directory (blockchain db and indices)
+data-dir=/var/lib/monero/bitmonero   # Blockchain storage location
+
+# Optional pruning
+#prune-blockchain=1           # Pruning saves 2/3 of disk space w/o degrading functionality but contributes less to the network
+#sync-pruned-blocks=1         # Allow downloading pruned blocks instead of prunning them yourself
+
+# Centralized services
+check-updates=disabled         # Do not check DNS TXT records for a new version
+enable-dns-blocklist=1         # Block known malicious nodes
+
+# Banlist
+#ban-list=/path/to/ban.txt      # Local list of peers to ban
+
+# Log file
 log-file=/var/log/monero/monero.log
-max-log-file-size=2147483648   # 2 GB; configure logrotate for log management
+log-level=0                    # Minimal logs, WILL NOT log peers or wallets connecting
+max-log-file-size=2147483648   # Set to 2GB to mitigate log trimming by monerod; configure logrotate instead
 
-# Clearnet P2P and RPC
-p2p-bind-ip=0.0.0.0
-p2p-bind-port=18080
-rpc-bind-ip=0.0.0.0
-rpc-bind-port=18089
-confirm-external-bind=1
+# P2P full node
+#p2p-bind-ip=0.0.0.0            # Bind to all interfaces (the default)
+#p2p-bind-port=18080            # Bind to default port
+#no-igd=1                       # Disable UPnP port mapping
 
-# Public RPC announcement (optional)
-#public-node=1
+# RPC open node
+#public-node=1                  # Advertise to other users they can use this node for connecting their wallets
+rpc-restricted-bind-ip=0.0.0.0 # Bind to all interfaces (the Open Node)
+rpc-restricted-bind-port=18089 # Bind to a new RESTRICTED port (the Open Node)
 
-# Tor/I2P transaction proxy (enable as needed)
-# For Tor:
-#tx-proxy=tor,socks,127.0.0.1:9050
+# RPC TLS
+rpc-ssl=autodetect             # Use TLS if client wallet supports it; [enabled|disabled|(default)autodetect]
 
-# For I2P:
-#tx-proxy=i2p,socks,127.0.0.1:4447
+# ZMQ
+#zmq-rpc-bind-ip=127.0.0.1      # Default 127.0.0.1
+#zmq-rpc-bind-port=18082        # Default 18082
+zmq-pub=tcp://127.0.0.1:18083  # ZMQ pub
+#no-zmq=1                       # Disable ZMQ RPC server
 
-# Optional: reduce log noise once stable
-#log-level=0
+# Mempool size
+max-txpool-weight=2684354560   # Maximum unconfirmed transactions pool size in bytes (here ~2.5GB, default ~618MB)
+
+# Database sync mode
+#db-sync-mode=safe:sync        # Slow but reliable db writes
+
+# Network limits
+out-peers=12              # Default 12
+in-peers=48               # The default is unlimited; we prefer to put a cap on this
+
+limit-rate-up=1048576     # 1048576 kB/s == 1GB/s; a raise from default 2048 kB/s; contribute more to p2p network
+limit-rate-down=1048576   # 1048576 kB/s == 1GB/s; a raise from default 8192 kB/s; allow for faster initial sync
+
+# Tor/I2P: broadcast transactions originating from connected wallets over Tor/I2P (does not concern relayed transactions)
+#tx-proxy=i2p,127.0.0.1:4447,12,disable_noise  # I2P
+#tx-proxy=tor,127.0.0.1:9050,12,disable_noise  # Tor
+
+# Tor/I2P: tell monerod your onion address so it can be advertised on P2P network
+#anonymous-inbound=PASTE_YOUR_I2P_HOSTNAME,127.0.0.1:18085,24         # I2P
+#anonymous-inbound=PASTE_YOUR_ONION_HOSTNAME:18084,127.0.0.1:18084,24 # Tor
+
+# Tor: be forgiving to connecting wallets
+disable-rpc-ban=1
 ```
 > Ensure paths and ports match your directories and firewall rules; uncomment public-node or tx-proxy if you intend to use them.
 {: .prompt-info }
