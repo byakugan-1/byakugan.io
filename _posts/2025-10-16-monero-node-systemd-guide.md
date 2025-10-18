@@ -267,7 +267,7 @@ limit-rate-down=1048576   # 1048576 kB/s == 1GB/s; a raise from default 8192 kB/
 # Tor: be forgiving to connecting wallets
 disable-rpc-ban=1
 ```
-> Ensure paths and ports match your directories and firewall rules; uncomment public-node or tx-proxy if you intend to use them.
+> Ensure paths and ports match your directories and firewall rules
 {: .prompt-info }
 
 ## Run monerod via systemd
