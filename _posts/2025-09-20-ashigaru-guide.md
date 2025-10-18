@@ -7,6 +7,7 @@ description: Learn how to setup and use Ashigaru Terminal for use in your browse
 # comments: false
 pin: true
 author: zeroxsix
+image: /assets/img/ashigaru-terminal-guide-images/header.png
 ---
 
 This guide walks you through setting up the Ashigaru Terminal on a secure Ubuntu/Debian system using:

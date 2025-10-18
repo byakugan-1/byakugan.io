@@ -6,9 +6,8 @@ tags: [security,authentication,gpg,gnupg,sparrow,authenticity]     # TAG names s
 description: How to verify the integrity and authenticity of software?
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/gpg-guide-images/cover.webp
 ---
-
-![cover](/assets/img/gpg-guide-images/cover.webp)
 
 When downloading software, it's very important to ensure that it hasn't been altered and that it indeed comes from the official source. This is especially true for software related to Bitcoin, such as wallet software, which allows you to secure the keys giving access to your funds. In this tutorial, we will see how to verify the integrity and authenticity of software before installing it. We will use Sparrow Wallet as an example, a favorite wallet software among bitcoiners, but the procedure will be the same for any other software.
 

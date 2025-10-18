@@ -6,6 +6,7 @@ tags: [bitcoin,seedsigner,security]     # TAG names should always be lowercase
 description: A clear breakdown of why SeedSigner’s “firmware risk” is misunderstood, and how the real vulnerability lies in the SD card, not the device itself.
 # comments: false
 author: keith_mukai
+image: /assets/img/seedsigner-firmware-images/header.png
 ---
 
 On [Rabbit Hole Recap #320](https://youtu.be/yD-3Z9zl_QU?t=2277), ODELL said:

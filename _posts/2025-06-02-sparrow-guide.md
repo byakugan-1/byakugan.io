@@ -6,6 +6,7 @@ tags: [bitcoin,sparrow,security,wallets]     # TAG names should always be lowerc
 description: How to install, configure and use Sparrow Wallet
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/sparrow-guide-images/header.png
 ---
 
 {% include embed/youtube.html id='yJpvfRl03Tw' %}

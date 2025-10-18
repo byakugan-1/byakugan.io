@@ -6,6 +6,7 @@ tags: [security,nodes,monero,server]     # TAG names should always be lowercase
 description: Learn to run a Monero node via Systemd
 # comments: false
 author: monerocommunity
+image: /assets/img/monero-node-guide-images/header.png
 ---
 
 Running your own Monero node as a systemd service and adding Tor/I2P hidden services gives you a reliable, always‑on backend for your wallets and the network — with private, end‑to‑end encrypted access for desktop and mobile. This comprehensive guide covers downloading and verifying Monero binaries, installing and running monerod via systemd, exposing clearnet P2P/RPC, adding Tor/I2P, testing from server and client, wallet configuration, and debugging.

@@ -6,9 +6,8 @@ tags: [bitcoin,sparrow,security,wallets,hardware,coinkite,passphrase,coldcard]  
 description: How to Setup and Use the Coldcard Q (beginner to expert)
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/coldcardq-guide-images/cover.webp
 ---
-
-![cover](/assets/img/coldcardq-guide-images/cover.webp)
 
 A hardware wallet is an electronic device dedicated to managing and securing the private keys of a Bitcoin wallet. Unlike software wallets (or hot wallets) installed on general-purpose machines often connected to the Internet, hardware wallets enable private keys to be physically isolated, reducing the risk of piracy and theft.
 

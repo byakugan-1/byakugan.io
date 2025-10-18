@@ -6,9 +6,8 @@ tags: [messages,signal,encryption]     # TAG names should always be lowercase
 description: Using Signal for end-to-end encrypted messaging
 # comments: false
 author: loicpandul
+image: /assets/img/signal-guide-images/cover.webp
 ---
-
-![cover](/assets/img/signal-guide-images/cover.webp)
 
 Signal is an end-to-end encrypted messaging application, designed to offer good privacy by default. Every message, call and file is protected by the Signal protocol, recognized as one of the most robust messaging protocols. It is reused by many other applications, including WathsApp, Facebook Messenger, Skype and Google Messages for RCS communications.
 

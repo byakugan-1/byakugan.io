@@ -5,6 +5,7 @@ categories: [Guide, Privacy]
 tags: [vps,security,mynymbox,hosting,server]     # TAG names should always be lowercase
 description: Learn to securely set up and harden a Virtual Private Server (VPS)
 # comments: false
+image: /assets/img/linux-vps-guide-images/header.png
 ---
 
 ## Buy a VPS privately

@@ -6,9 +6,8 @@ tags: [security,wallets,cake wallet,pajoin,silentpayments]     # TAG names shoul
 description: Guide on Cake Wallet and Silent Payments
 # comments: false
 author: runningbitcoin
+image: /assets/img/cake-guide-images/header.png
 ---
-
-![cover](/assets/img/cake-guide-images/cover.webp)
 
 This guide explores [Cake Wallet](https://cakewallet.com): an open-source, non-custodial, privacy-focused multi-currency wallet available for Android, iOS, macOS, Linux, and Windows. We'll dive into its Bitcoin-specific privacy features, walk through sending/receiving Bitcoin via Silent Payments (an improved on-chain privacy protocol), and look at the implementation of PayJoin v2 for asynchronous transactions.
 

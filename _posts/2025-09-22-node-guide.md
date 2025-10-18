@@ -6,6 +6,7 @@ tags: [bitcoin, node, fulcrum, dojo, robosats, monero]     # TAG names should al
 description: Learn to Build a verifiable, Tor‑ready Bitcoin Node stack
 # comments: false
 pin: true
+image: /assets/img/bitcoin-node-guide-images/header.png
 ---
 
 ### You don’t outsource freedom. You build it.

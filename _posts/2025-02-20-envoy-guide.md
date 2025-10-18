@@ -1,14 +1,13 @@
 ---
-title: Envoy Guide
+title: Passport Core Guide (Envoy)
 date: 2025-02-20 12:30:00 +0000
 categories: [Guide, Wallets]
 tags: [bitcoin,sparrow,security,wallets,hardware,foundation passport,envoy]     # TAG names should always be lowercase
 description: How to Set up and use a Passport with the Envoy application
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/envoy-guide-images/header.png
 ---
-
-![cover](/assets/img/envoy-guide-images/cover.webp)
 
 Envoy is a Bitcoin wallet management application developed by Foundation. It is specially designed for use with the Passport hardware wallet.
 

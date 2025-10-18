@@ -6,6 +6,7 @@ tags: [privacy,encryption,chat,simplex]     # TAG names should always be lowerca
 description: Learn how to get started with SimpleX Chat
 # comments: false
 author: loicpandul
+image: /assets/img/simplex-guide-images/header.png
 ---
 
 Launched in 2021, SimpleX is a free instant messaging application with a radically different approach to privacy. Unlike WhatsApp, Signal and other centralized messaging services, SimpleX stands out for its user management: there are no user identifiers, pseudonyms, numbers or visible public keys. This total absence of identifiers makes it virtually impossible to correlate users, guaranteeing a high level of privacy.

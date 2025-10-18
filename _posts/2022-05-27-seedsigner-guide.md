@@ -7,9 +7,8 @@ tags: [bitcoin,seedsigner,security,sparrow,multi-sig]     # TAG names should alw
 description: This comprehensive how-to guide walks you through unboxing, setting up and signing bitcoin transactions with the air-gapped SeedSigner device.
 # comments: false
 authors: [econoalchemist, vibrant]
+image: /assets/img/seedsigner-tutorial-images/header.png
 ---
-
-![cover](/assets/img/seedsigner-tutorial-images/01.webp)
 
 This comprehensive how-to guide walks you through unboxing, setting up and signing bitcoin transactions with the air-gapped SeedSigner device.
 

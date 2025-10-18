@@ -1,14 +1,13 @@
 ---
-title: Samourai Dojo Guide
+title: Vanilla Samourai Dojo Guide
 date: 2025-02-20 12:30:00 +0000
 categories: [Guide, Nodes]
 tags: [bitcoin,nodes,hardware,samourai,dojo,ashigaru]     # TAG names should always be lowercase
 description: How to Setup and Use Samourai Dojo
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/vanilla-dojo-guide-images/header.png
 ---
-
-![Image](/assets/img/vanilla-dojo-guide-images/cover.webp)
 
 *This tutorial is based on [the official Ashigaru documentation](https://ashigaru.rs/docs/), which I have taken over and expanded. I have rewritten all sections to improve clarity, added further detailed explanations, as well as illustrations for beginners, to make installation and use easier to understand.*
 

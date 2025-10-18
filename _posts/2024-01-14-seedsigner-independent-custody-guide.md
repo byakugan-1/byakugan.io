@@ -7,9 +7,8 @@ tags: [bitcoin,seedsigner,security,sparrow,multi-sig]     # TAG names should alw
 description: A guide written to help people get to the self-custody finish line
 # comments: false
 author: seedsigner
+image: /assets/img/seedsigner-guide-images/header.png
 ---
-
-![SeedSigner Logo](/assets/img/seedsigner-guide-images/seedsigner_logo.png)
 
 (**Some Notes on Titling:** I almost chose "The SeedSigner Manifesto" as a grab-your-attention title with a little bit of cheekiness baked in. As I think more and more about bitcoin custody and how it has evolved over time, the term "manifesto" seems increasingly appropriate to use for some of the ideas that underlie this guide. Manifestos commonly challenge conventional ways of thinking and can be threatening to incumbents and status quo beliefs.
 

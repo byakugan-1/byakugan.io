@@ -6,9 +6,8 @@ tags: [bitcoin,sparrow,security,wallets,hardware,foundation passport]     # TAG 
 description: How to Setup and Use the Passport Core By Foundation Devices
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/passport-core-guide-images/header.png
 ---
-
-![Image](/assets/img/passport-core-guide-images/cover.webp)
 
 The Passport is a Bitcoin-only hardware wallet, designed by Foundation Devices, an American company founded in April 2020 in Boston.
 

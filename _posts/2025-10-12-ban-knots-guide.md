@@ -5,6 +5,7 @@ categories: [Guide, Security]
 tags: [security,nodes,bitcoin core,bitcoin knots,server]     # TAG names should always be lowercase
 description: Learn to Ban Knots Nodes from Peering with your Core node
 # comments: false
+image: /assets/img/ban-knots-guide-images/header.png
 ---
 
 Credit: [@noosphere888x2](https://x.com/noosphere888x2) for creating this tool.

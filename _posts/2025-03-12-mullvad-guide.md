@@ -6,9 +6,8 @@ tags: [network,vpn,mullvad,security]     # TAG names should always be lowercase
 description: How to get up and running with Mullvad VPN paid for in Bitcoin
 # comments: false
 author: loicpandul
+image: /assets/img/mullvad-guide-images/cover.webp
 ---
-
-![Image](/assets/img/mullvad-guide-images/cover.webp)
 
 A VPN ("Virtual Private Network") is a service that establishes a secure and encrypted connection between your phone or computer and a remote server managed by a VPN provider.
 

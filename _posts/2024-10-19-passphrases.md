@@ -6,9 +6,8 @@ tags: [bitcoin,sparrow,security,wallets,passphrase]     # TAG names should alway
 description: Information on BIP-39 Passphrases
 # comments: false
 author: loicpandul
+image: assets/img/passphrase-images/cover.webp
 ---
-
-![cover](assets/img/passphrase-images/cover.webp)
 
 ## What is a BIP39 passphrase?
 

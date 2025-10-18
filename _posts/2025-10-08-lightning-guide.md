@@ -1,11 +1,12 @@
 ---
-title: How to Self Host Your own Private Lightning Node
+title: Bitcoin Lightning Node Guide
 date: 2025-10-08 12:30:00 +0000
 categories: [Guide, Privacy]
 tags: [bitcoin, node, lightning, alby, ride the lightning, zeus, boltz]     # TAG names should always be lowercase
 description: Learn How to setup LND, Alby Hub, Ride the Lightning and Zeus
 # comments: false
 # pin: true
+image: /assets/img/lightning-node-guide-images/header.png
 ---
 
 

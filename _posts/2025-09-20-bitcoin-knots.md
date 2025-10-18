@@ -6,6 +6,7 @@ tags: [bitcoin, bitcoin knots, analysis]     # TAG names should always be lowerc
 description: Knots promises cleaner mempools, but policy filters dont stop on-chain spam - and they break privacy. Here's why Bitcoin Core remains the pragmatic choice.
 # comments: false
 pin: true
+image: /assets/img/knots-blog-images/header.png
 ---
 
 Your node is your lens into Bitcoin. Choose the wrong lens, and you’re not just seeing a distorted picture - you’re accepting hidden tradeoffs in security, privacy, and reliability. With rising frustration over “spam” and shifting policy in Bitcoin Core, some are eyeing Bitcoin Knots for stricter filters. But mempool policy isn’t a spam filter, and running Knots comes with real governance and privacy downsides. If your goal is digital sovereignty, you need to understand those tradeoffs clearly.

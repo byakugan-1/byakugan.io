@@ -6,9 +6,8 @@ tags: [security,two factor,yubikey,nitrokey,proton,authenitcation]     # TAG nam
 description: How to use a physical security key
 # comments: false
 authors: [loicpandul, vibrant]
+image: /assets/img/yubikey-guide-images/cover.webp
 ---
-
-![Image](/assets/img/yubikey-guide-images/cover.webp)
 
 Nowadays, two-factor authentication (2FA) has become essential for enhancing the security of online accounts against unauthorized access. With the rise in cyber attacks, relying solely on a password to secure your accounts is sometimes insufficient.
 
