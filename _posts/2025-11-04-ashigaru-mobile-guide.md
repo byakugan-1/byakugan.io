@@ -29,7 +29,7 @@ Ashigaru integrates a suite of advanced tools for privacy and UTXO management:
 
 Ashigaru is designed for users who are mindful of transaction traceability on Bitcoin. Whether you care about preserving privacy, you’re an experienced bitcoiner focused on self‑custody, or you face heightened surveillance risks, this wallet gives you the tools to take back control of your on‑chain activity.
 
-Ashigaru is available as a mobile app, which we’ll explore in this tutorial. It has a companion desktop application called Ashigaru Terminal, which I've covered in [this guide](https://byakugan.io/posts/ashigaru-terminal-complete-guide).
+Ashigaru is available as a mobile app, which we’ll explore in this tutorial. It has a companion desktop application called Ashigaru Terminal, which I've covered in [this guide](https://byakugan.io/posts/ashigaru-terminal-setup-guide).
 
 ![Image](/assets/img/ashigaru-mobile-guide/02.webp)
 
@@ -218,7 +218,7 @@ Once you have funds in Ashigaru, you can send them. Tap the “+” button at th
 
 ![Image](/assets/img/ashigaru-mobile-guide/29.webp)
 
-Choose the account to spend from. For now, we haven’t covered the “Postmix” account (used for coinjoins and covered in another [tutorial](https://byakugan.io/posts/ashigaru-terminal-complete-guide)). We’ll send from the main deposit account.
+Choose the account to spend from. For now, we haven’t covered the “Postmix” account (used for coinjoins and covered in another [tutorial](https://byakugan.io/posts/ashigaru-terminal-setup-guide)). We’ll send from the main deposit account.
 
 ![Image](/assets/img/ashigaru-mobile-guide/30.webp)
 
