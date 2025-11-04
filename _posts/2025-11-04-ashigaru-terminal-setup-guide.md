@@ -31,7 +31,7 @@ To install Ashigaru Terminal, you’ll need Tor Browser because binaries are dis
 
 From Tor Browser, go to the releases page of the Git repository and download the latest version for your operating system:
 
-Onion link - [http://ashicodepbnpvslzsl2bz7l2pwrjvajgumgac423pp3y2deprbnzz7id.onion/Ashigaru/Ashigaru-Terminal/releases/](http://ashicodepbnpvslzsl2bz7l2pwrjvajgumgac423pp3y2deprbnzz7id.onion/Ashigaru/Ashigaru-Terminal/releases/)
+Onion link - http://ashicodepbnpvslzsl2bz7l2pwrjvajgumgac423pp3y2deprbnzz7id.onion/Ashigaru/Ashigaru-Terminal/releases/
 
 ![Image](/assets/img/ashigaru-terminal-setup-guide/01.webp)
 
