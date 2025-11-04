@@ -1,6 +1,6 @@
 ---
 title: Ashigaru Mobile Guide
-date: 2025-02-20 12:30:00 +0000
+date: 2025-11-04 12:30:00 +0000
 categories: [Guide, Wallets]
 tags: [bitcoin,wallets,privacy,samourai,dojo,ashigaru]     # TAG names should always be lowercase
 description: How to Setup and Use Ashigaru Mobile to Privately Secure and Manage your Bitcoin

@@ -1,11 +1,11 @@
 ---
 title: Ashigaru Terminal Setup Guide
-date: 2025-02-20 12:30:00 +0000
+date: 2025-11-04 12:30:00 +0000
 categories: [Guide, Wallets]
 tags: [bitcoin,wallets,privacy,samourai,dojo,ashigaru,terminal]     # TAG names should always be lowercase
 description: How to Use Ashigaru on desktop to perform Whirlpool coinjoins
 # comments: false
-pin: true
+# pin: true
 authors: [vibrant, loicpandul]
 image: /assets/img/ashigaru-terminal-setup-guide/header.png
 ---
