@@ -1,11 +1,11 @@
 ---
-title: Ashigaru Terminal Guide
+title: Ashigaru Terminal Server Setup Guide
 date: 2025-09-20 12:30:00 +0000
 categories: [Guide, Privacy]
 tags: [ashigaru, ashigaru terminal, privacy]     # TAG names should always be lowercase
 description: Learn how to setup and use Ashigaru Terminal for use in your browser
 # comments: false
-pin: true
+# pin: true
 author: zeroxsix
 image: /assets/img/ashigaru-terminal-guide-images/header.png
 ---
