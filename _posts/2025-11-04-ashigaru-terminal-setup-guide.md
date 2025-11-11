@@ -173,7 +173,7 @@ You have two choices:
 
 In this tutorial, we’ll use the second option. If you prefer creating a new wallet, the procedure is identical — the only difference is you’ll back up the new mnemonic and BIP39 passphrase during creation.
 
-Note: Ashigaru Terminal cannot spend directly. Either sync the same wallet in Terminal and the Ashigaru app (as we do here) or use`Mix to` (covered next tutorial) to auto‑send funds to a hardware wallet after a set number of mix cycles.
+Note: Ashigaru Terminal does not allow you to spend your bitcoins directly. You can either synchronize the same wallet on Ashigaru Terminal and the Ashigaru app (which I will do in this tutorial), or on Sparrow Wallet.
 
 If you don’t yet have a wallet in the Ashigaru app, follow [this guide](https://byakugan.io/posts/ashigaru-mobile-guide).
 
@@ -191,7 +191,7 @@ Give your wallet a name.
 
 Choose`Hot Wallet` as the wallet type.
 
-Note:`Watch‑only` lets you save a hardware wallet xpub for later use with`Mix to`. A watch‑only wallet cannot participate in coinjoins. We’ll cover “Mix to” in the next tutorial.
+Note:`Watch‑only` lets you save a hardware wallet xpub for later use with`Mix to`. A watch‑only wallet cannot participate in coinjoins. We’ll cover “Mix to” in a future tutorial.
 
 ![Image](/assets/img/ashigaru-terminal-setup-guide/18.webp)
 
@@ -247,4 +247,4 @@ Operation is similar to Sparrow (Ashigaru Terminal is a fork of Sparrow Server),
 
 ![Image](/assets/img/ashigaru-terminal-setup-guide/27.webp)
 
-You now know how to install and get started with Ashigaru Terminal. In the next tutorial, we’ll cover performing coinjoins and managing Postmix funds — either via the Ashigaru mobile app or with the`Mix to` option.
+You now know how to install and get started with Ashigaru Terminal. In the [next tutorial](https://byakugan.io/posts/ashigaru-whirlpool-guide), we’ll cover performing coinjoins and managing Postmix funds via the Ashigaru mobile app.

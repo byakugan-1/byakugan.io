@@ -5,7 +5,7 @@ categories: [Blog, Bitcoin]
 tags: [bitcoin, bitcoin knots, analysis]     # TAG names should always be lowercase
 description: Knots promises cleaner mempools, but policy filters dont stop on-chain spam - and they break privacy. Here's why Bitcoin Core remains the pragmatic choice.
 # comments: false
-pin: true
+#pin: true
 image: /assets/img/knots-blog-images/header.png
 ---
 

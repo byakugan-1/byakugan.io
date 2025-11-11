@@ -5,7 +5,7 @@ categories: [Guide, Wallets]
 tags: [bitcoin,wallets,privacy,samourai,dojo,ashigaru]     # TAG names should always be lowercase
 description: How to Setup and Use Ashigaru Mobile to Privately Secure and Manage your Bitcoin
 # comments: false
-pin: true
+#pin: true
 authors: [vibrant, loicpandul]
 image: /assets/img/ashigaru-mobile-guide/header.png
 ---
