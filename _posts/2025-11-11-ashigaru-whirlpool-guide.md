@@ -176,7 +176,7 @@ Here are several possible strategies to handle coinjoin change UTXOs without com
 
 - Buy gift cards or prepaid Visa cards: Platforms like [Bitrefill](https://www.bitrefill.com/) allow exchanging bitcoin for gift cards or reloadable Visa cards. This can be a simple, discreet way to spend toxic UTXOs. But be aware that these UTXOs are still linked to their previous history so be careful which ones you spend
 
-- Swap them for Monero: Samourai Wallet previously offered atomic BTC/XMR swaps (now discontinued). This service exists in [Eigen Wallet](https://eigenwallet.org/), you can isolate these UTXOs, convert to XMR, then back to BTC if desired. This method can be costly and depends on available liquidity. Also you must consider you you want to potentially risk a UTXO that may be associated with you being given to a third party who can do whatever they want with it?
+- Swap them for Monero: Samourai Wallet previously offered atomic BTC/XMR swaps (now discontinued). This service exists in [Eigen Wallet](https://eigenwallet.org/), you can isolate these UTXOs, convert to XMR, then back to BTC if desired. This method can be costly and depends on available liquidity. Also you must consider do you want to potentially risk a UTXO that may be associated with you being given to a third party who can do whatever they want with it?
 
 - Open a lightning channel: Transferring toxic UTXOs to LN to benefit from lower transaction fees can be useful. However, this may leak information depending on your LN usage, so proceed carefully.
 
