@@ -32,7 +32,7 @@ As of November 2025 on Ashigaru, two pool denominations are available (this list
 -`0.25 BTC`, with an entry fee of`0.0125 BTC`
 -`0.025 BTC`, with an entry fee of`0.00125 BTC`
 
-Each mixing cycle usually includes between 5 UTXOs as inputs and outputs.
+Each mixing cycle usually includes 5 UTXOs as inputs and outputs.
 
 ![Image](/assets/img/ashigaru-whirlpool-guide/01.webp)
 
