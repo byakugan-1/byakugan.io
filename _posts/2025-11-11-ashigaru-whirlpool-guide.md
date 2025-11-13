@@ -1,5 +1,5 @@
 ---
-title: Ashigaru - Whirlpool Coinjoin
+title: Ashigaru Whirlpool
 date: 2025-11-04 12:30:00 +0000
 categories: [Guide, Privacy]
 tags: [bitcoin,wallets,privacy,samourai,dojo,ashigaru,terminal]     # TAG names should always be lowercase

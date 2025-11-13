@@ -305,4 +305,4 @@ Once the notification transaction confirms, you can send donations to the projec
 
 ![Image](/assets/img/ashigaru-mobile-guide/40.webp)
 
-You now know how to use Ashigaru’s core features. In future tutorials, we’ll explore advanced spending types and Whirlpool — the coinjoin implementation inherited from Samourai Wallet.
+You now know how to use Ashigaru’s core features. In the [next guide](https://byakugan.io/posts/ashigaru-terminal-setup-guide), we explore advanced spending types and Whirlpool — the coinjoin implementation inherited from Samourai Wallet.
