@@ -794,7 +794,7 @@ in ~/fulcrum nano a banner.txt and add a fun ASCII art to make your node your ow
 
 Here is a demo ASCII Art you may like to take inspiration from, it uses the "Mono 12" style:
 
-```txt
+```
                                                                            
 ▗▄▄▄▖▗▖ ▗▖▗▄▄▄▖     ▗▄▄▖  ▄▄▄ ▗▄▄▄▖  ▄▄  ▗▄▖  ▄▄▄ ▗▄ ▗▖     ▄   ▄  ▄  ▄▖ ▗▄
 ▝▀█▀▘▐▌ ▐▌▐▛▀▀▘     ▐▛▀▜▌ ▀█▀ ▝▀█▀▘ █▀▀▌ █▀█  ▀█▀ ▐█ ▐▌     █   █ ▐█▌ ▐▙ ▟▌
