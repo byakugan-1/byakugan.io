@@ -792,6 +792,20 @@ db_mem = 5120
 ### Create optional banner
 in ~/fulcrum nano a banner.txt and add a fun ASCII art to make your node your own. You will see this when you connect to sparrow. It can be a lighthearted way to verify you are connected to your own server. [Here](https://patorjk.com/software/taag/) is a useful ASCII art creation website.
 
+Here is a demo ASCII Art you may like to take inspiration from, it uses the "Mono 12" style:
+
+```txt
+                                                                           
+▗▄▄▄▖▗▖ ▗▖▗▄▄▄▖     ▗▄▄▖  ▄▄▄ ▗▄▄▄▖  ▄▄  ▗▄▖  ▄▄▄ ▗▄ ▗▖     ▄   ▄  ▄  ▄▖ ▗▄
+▝▀█▀▘▐▌ ▐▌▐▛▀▀▘     ▐▛▀▜▌ ▀█▀ ▝▀█▀▘ █▀▀▌ █▀█  ▀█▀ ▐█ ▐▌     █   █ ▐█▌ ▐▙ ▟▌
+  █  ▐▌ ▐▌▐▌        ▐▌ ▐▌  █    █  ▐▛   ▐▌ ▐▌  █  ▐▛▌▐▌     ▜▖█▗▛ ▐█▌  █▄█ 
+  █  ▐███▌▐███      ▐███   █    █  ▐▌   ▐▌ ▐▌  █  ▐▌█▐▌     ▐▌█▐▌ █ █  ▝█▘ 
+  █  ▐▌ ▐▌▐▌        ▐▌ ▐▌  █    █  ▐▙   ▐▌ ▐▌  █  ▐▌▐▟▌     ▐█▀█▌ ███   █  
+  █  ▐▌ ▐▌▐▙▄▄▖     ▐▙▄▟▌ ▄█▄   █   █▄▄▌ █▄█  ▄█▄ ▐▌ █▌     ▐█ █▌▗█ █▖  █  
+  ▀  ▝▘ ▝▘▝▀▀▀▘     ▝▀▀▀  ▀▀▀   ▀    ▀▀  ▝▀▘  ▀▀▀ ▝▘ ▀▘     ▝▀ ▀▘▝▘ ▝▘  ▀  
+Successfully connected to your Fulcrum $SERVER_VERSION Server!  
+```                                                                                                                                                
+
 ### Create a systemd service for auto startup at boot
 ```bash
 sudo nano /etc/systemd/system/fulcrum.service
