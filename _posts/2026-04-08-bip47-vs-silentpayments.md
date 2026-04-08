@@ -107,7 +107,7 @@ The trade-offs are worth naming directly too.
 
 In the standard model, the relationship is established through a notification transaction. That is the piece critics usually point at first. Fair enough. It is an extra step. It is an extra transaction. It is additional structure.
 
-But BIP47 does not technically need to be understood only through that older notification flow forever. In the broader BIP47 world, coordination can also happen through Soroban-based communication, as seen in Cahoots workflows. Soroban has been introduced as the Soroban peer-to-peer network in Samourai Dojo v1.27.0, points in a direction where more of the useful coordination can happen through decentralised communications rather than always leaning on the classic notification model alone. That does not mean the notification transaction disappears from every context today, but it does mean the BIP47 story is no longer frozen in its earliest form.
+But BIP47 does not technically need to be understood only through that older notification flow forever. In the broader BIP47 world, coordination can also happen through Soroban-based communication, as seen in Cahoots workflows. Soroban has been introduced as the Soroban peer-to-peer network in Samourai Dojo v1.27.0, this points to a future where more of the useful coordination can happen through decentralised communications rather than always leaning on the classic notification model alone. That does not mean the notification transaction disappears from every context today, but it does mean the BIP47 story is no longer frozen in its earliest form.
 
 And the notification transaction has never been a purely negative thing anyway.
 
