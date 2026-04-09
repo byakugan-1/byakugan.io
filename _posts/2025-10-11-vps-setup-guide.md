@@ -3,1034 +3,647 @@ title: Linux VPS Setup and Hardening Guide
 date: 2025-10-08 12:30:00 +0000
 categories: [Guide, Privacy]
 tags: [vps,security,mynymbox,hosting,server]     # TAG names should always be lowercase
-description: Learn to securely set up and harden a Virtual Private Server (VPS)
+description: Learn to securely set up and harden a Debian or Ubuntu VPS step by step
 # comments: false
 image: /assets/img/linux-vps-guide-images/header.png
 ---
 
+A VPS is one of those things that looks simple right up until the moment you deploy one and realise the wider internet has already noticed.
+
+The basic workflow is easy enough: rent a server, get an IP address, log in over SSH, install what you wanted to run, and carry on with your day.
+
+The real workflow is slightly different.
+
+You rent the server, get the IP address, and before you have even finished admiring your fresh machine, the password guessing starts. That is not paranoia. That is just how public IPv4 works. A new VPS is not a quiet cottage in the countryside. It is an unlocked shed dropped into the middle of a rough industrial estate.
+
+So the first rule is simple: do not install your application first. Secure the box first.
+
+This guide walks through a clean Ubuntu or Debian based VPS setup in the order that actually makes sense:
+
+- buy the VPS privately if you can;
+- log in carefully;
+- update the system;
+- create a non-root user;
+- harden SSH;
+- lock down the firewall;
+- enable automatic security updates;
+- set sane system defaults;
+- add a private mesh network;
+- remove public SSH entirely if you want the stronger setup.
+
+The goal here is not to produce some theatrical “military grade” server fantasy. The goal is much more boring and much more useful: reduce obvious attack surface, avoid stupid mistakes, and end up with a box that is calm, understandable, and reasonably difficult to mess with.
+
 ## Buy a VPS privately
 
-If you value privacy, choose providers that minimize data collection and support privacy-preserving payments:
+If privacy matters to you, the process starts before you ever type your first SSH command.
+
+Choose providers that minimise data collection and support privacy-preserving payments:
+
 - [1984.hosting](https://1984.hosting)
-- [mynymbox.net](https://mynymbox.net)
+- [mynymbox.io](https://mynymbox.io)
 
-Prefer paying with Bitcoin after a Whirlpool coinjoin, Bitcoin via Lightning, or Monero. These methods reduce linkage between your identity and your server. When possible, avoid providing personally identifying information during signup.
+If possible, pay with Bitcoin after a Whirlpool coinjoin, Bitcoin via Lightning, or Monero. The point is not cosplay. The point is reducing unnecessary linkage between your real-world identity and a machine that may eventually host personal services, websites, automation, or tools you would prefer not to tie directly back to your legal name.
 
-## Choosing a Linux distro for your VPS (quick guide)
+When the provider allows it, avoid giving more information than necessary. Use a fresh email address. Keep billing metadata minimal. Privacy is not one big magic trick. It is a chain of smaller decisions that stop you from handing over more context than the situation actually requires.
 
-- Ubuntu (Debian-based)
-  - Pros: beginner-friendly, broad package support, many tutorials, frequent updates
-  - Cons: more default services running, therefore more bloated
-- Debian (independent)
-  - Pros: very stable, lightweight baseline, ideal for long-running or low-RAM servers
-  - Cons: older packages by default, more manual setup early on
-- Alpine (independent)
-  - Pros: extremely lightweight, fast boot, good security posture
-  - Cons: not beginner-friendly, more manual configuration, no systemd, smaller community
-- Fedora (Red Hat family)
-  - Pros: cutting-edge stack, SELinux by default, strong dev tooling
-  - Cons: faster-moving base can require more maintenance and frequent updates
+## Pick a sensible VPS size
 
-Rule of thumb: Ubuntu LTS or Debian Stable are solid defaults. If RAM is tight, lighter distros help.
+For a basic personal server, you usually do not need much.
 
-## Setup and Hardening guide
+A good starting point is:
 
-### 1) Inspect local SSH keys
+- 1 vCPU
+- 4 GB RAM
+- 80 to 100 GB storage
 
-```bash
-ls -la ~/.ssh/
-```
+That is plenty for many self-hosted tools, websites, dashboards, VPN utilities, lightweight bots, and general personal infrastructure.
 
-> Lists your local SSH key files and permissions. You’ll use public keys to log
-> in to the VPS; keep private keys protected with a strong passphrase.
+If all you are doing is hardening a small box for later use, do not overthink it. You can always resize later. It is usually better to start small with a clean and understandable machine than to immediately rent a larger one you do not yet know how to manage.
 
-```bash
-rm ~/.ssh/<name>
-```
+## Choose Ubuntu or Debian
 
-> Removes an old or unused key file. Do this only if you’re sure you won’t need
-> it. Rotate keys rather than leaving stale credentials around.
+This guide assumes a Debian-based system.
 
-```bash
-cat ~/.ssh/*.pub
-```
+Ubuntu LTS and Debian Stable are both perfectly reasonable choices:
 
-> Displays all public keys. These are safe to share with your VPS provider or
-> add to the server’s authorized_keys file.
+- **Ubuntu LTS**
+  - wider tutorial coverage
+  - very beginner friendly
+  - broad package support
+  - a bit more bloated by default
+- **Debian Stable**
+  - lighter baseline
+  - extremely dependable
+  - excellent for long-running servers
+  - packages can be older
 
-```bash
-cat ~/.ssh/<name>.pub
-```
+If you are newer to Linux servers, Ubuntu LTS is fine.
+If you prefer a slightly leaner default base and do not mind a little less hand-holding, Debian is excellent.
 
-> Shows a specific public key. Use the key that matches the private key you plan
-> to use for login.
+## Step 1: prepare an SSH key locally
 
-### 2) Generate SSH key for your VPS provider (local)
+Before touching the server, make sure you have a proper SSH key on your local machine.
 
-```bash
-ssh-keygen
-```
-
-> Generates a new SSH keypair interactively. Choose ed25519 when prompted and
-> set a long passphrase. Store the passphrase in a password manager.
-
-```bash
-~/.ssh/<SSH_KEY_NAME>
-```
-
-> This is the typical location for SSH keys. Replace `<SSH_KEY_NAME>` with a
-> clear name (e.g., id_ed25519_vps) to keep your keys organized.
+List existing keys:
 
 ```bash
 ls -la ~/.ssh/
 ```
 
-> Verifies that your new keys exist and have appropriate permissions.
+> Shows the SSH material already on your computer. This helps you see whether you already have keys you can reuse, and whether your `~/.ssh` directory looks sane.
+
+If you do not already have a dedicated key for this VPS, create one:
 
 ```bash
-cat ~/.ssh/<SSH_KEY_NAME>.pub
+ssh-keygen -t ed25519 -C "vps-admin-key"
 ```
 
-> Displays your public key. Add this to your VPS provider before creating the
-> server so you can log in without passwords.
+> Generates a modern Ed25519 SSH keypair. Use a descriptive label so you remember what the key is for later.
 
-### 3) First login and initial updates
+When prompted for the filename, give it something obvious, for example:
+
+```text
+/Users/you/.ssh/id_ed25519_vps
+```
+
+Then verify it exists:
+
+```bash
+ls -la ~/.ssh/
+```
+
+> Confirms that your new private and public key files were created.
+
+Display the public key so you can add it to your VPS provider or later paste it onto the server:
+
+```bash
+cat ~/.ssh/id_ed25519_vps.pub
+```
+
+> Prints the public half of your SSH key. This is safe to share. Never share the private key file.
+
+If your VPS provider lets you inject an SSH key during server creation, do that. It is cleaner than enabling password logins at the start.
+
+## Step 2: first login as root
+
+Most VPS providers give you root SSH access immediately.
+
+Log in:
 
 ```bash
 ssh root@<VPS_IP>
 ```
 
-> Logs in to the new server as root using your provider-injected key. Use this
-> only for the initial setup; you’ll create a non-root admin shortly.
+Or explicitly choose your key if needed:
 
 ```bash
-ssh -i ~/.ssh/<SSH_KEY_NAME> root@<VPS_IP>
+ssh -i ~/.ssh/id_ed25519_vps root@<VPS_IP>
 ```
 
-> Explicitly selects your private key file if your agent has multiple keys
-> loaded or the default isn’t correct.
+> Opens the first administrative session on the server. We use root only for the initial bootstrap, then move to a non-root account as quickly as possible.
+
+If the provider gave you only a password initially, log in with it once, but do not treat that as acceptable long-term. Password-based SSH on a public VPS is an open invitation to nuisance and worse.
+
+## Step 3: update the system immediately
+
+Before installing anything else, bring the base system up to date.
 
 ```bash
 apt update
 ```
 
-> Refreshes the package index so your system knows about the latest available
-> updates.
+> Refreshes the package lists so the server knows what current packages and security fixes are available.
 
 ```bash
 apt upgrade -y
 ```
 
-> Upgrades installed packages to their newest versions. Security patches often
-> arrive via these updates.
+> Installs the latest available upgrades. On a fresh VPS, this is one of the fastest and most useful things you can do.
+
+You are not doing this because updating is some kind of sacred ritual. You are doing it because the machine was imaged at some earlier point in time, and the internet did not politely stand still while it waited for you to log in.
+
+## Step 4: install the basic tools you actually need
+
+A minimal server image often omits things you will want for security, networking, and day-to-day sanity.
+
+Install a sensible starter set:
 
 ```bash
-apt install unattended-upgrades
+apt install -y curl wget ufw fail2ban ca-certificates gnupg unattended-upgrades apt-transport-https software-properties-common git
 ```
 
-> Installs the tool that automatically applies security updates.
+> Installs a small baseline toolkit:
+>
+> - `curl` and `wget` for fetching files
+> - `ufw` for firewall management
+> - `fail2ban` for banning repeated authentication abuse
+> - `ca-certificates` and `gnupg` for trusted package and key handling
+> - `unattended-upgrades` for automatic security updates
+> - `apt-transport-https` and `software-properties-common` for cleaner repository management
+> - `git` because sooner or later you will need it, and forgetting it is a classic waste of time
 
-```bash
-dpkg-reconfigure -plow unattended-upgrades
-```
+## Step 5: create a non-root admin user
 
-> Enables unattended security updates through a guided configuration. Choose to
-> apply security fixes automatically.
+Root should not be your everyday login.
 
-```bash
-nano /etc/apt/apt.conf.d/50unattended-upgrades
-```
-
-> Open the config and ensure “-security” origin is allowed. Consider enabling
-> automatic reboots during a maintenance window (e.g., 02:00) to apply kernel
-> fixes safely.
-
-```bash
-unattended-upgrades --dry-run --debug
-```
-
-> Performs a dry run to confirm that automatic updates are configured as
-> intended, without making changes.
-
-### 4) Create a non-root admin and verify sudo
+Create a normal administrative user:
 
 ```bash
 adduser <USERNAME>
 ```
 
-> Creates your daily admin account. Use a strong unique password even if you
-> primarily log in via SSH keys.
+> Creates a non-root account for daily administration. Give it a strong unique password even if you plan to use SSH keys only.
+
+Add the user to the `sudo` group:
 
 ```bash
 usermod -aG sudo <USERNAME>
 ```
 
-> Grants sudo privileges to your admin account for controlled elevation.
+> Grants the account permission to elevate privileges with `sudo` when needed.
+
+Switch into the new account:
 
 ```bash
 su - <USERNAME>
 ```
 
-> Switches to your new account so you can test its environment and permissions.
+> Starts a login shell as your new admin user so you can finish configuration in the account you actually intend to use.
+
+Test sudo:
 
 ```bash
 sudo whoami
 ```
 
-> Confirms sudo works (should print “root”). After this, avoid direct root
-> logins and use your admin account with sudo.
+> Confirms that privilege escalation works correctly. If it prints `root`, the account is set up properly.
 
-### 5) Configure SSH key authentication and harden SSH
+## Step 6: install your SSH key for the new user
 
-```bash
-ssh-keygen -t ed25519 -C "<KEY_LABEL>"
-```
+Now we make sure the new account can log in via SSH key.
 
-> Generates a modern local key (if you haven’t already). The label helps you
-> track purpose or ownership of the key.
+Create the SSH directory:
 
 ```bash
 mkdir -p ~/.ssh
 ```
 
-> Ensures the SSH directory exists on the server for your admin user.
+> Creates the `.ssh` directory in the new user’s home if it does not already exist.
+
+Lock down the permissions:
 
 ```bash
 chmod 700 ~/.ssh
 ```
 
-> Sets strict permissions so OpenSSH will accept the directory.
+> Makes the SSH directory readable and writable only by the account owner. OpenSSH is picky about this, and rightly so.
+
+Create the `authorized_keys` file:
 
 ```bash
 touch ~/.ssh/authorized_keys
 ```
 
-> Creates the authorized_keys file for your admin user.
+> Creates the file that stores public keys allowed to log in as this user.
+
+Set its permissions:
 
 ```bash
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-> Sets strict permissions on the authorized_keys file to avoid login failures.
+> Restricts access to the file so OpenSSH will accept it.
+
+Then, from your local machine, display your public key if you need to copy it again:
 
 ```bash
-cat ~/.ssh/id_ed25519.pub
+cat ~/.ssh/id_ed25519_vps.pub
 ```
 
-> Shows your local public key. You’ll paste this into the server’s
-> authorized_keys.
+Append that key to the server’s `authorized_keys` file:
 
 ```bash
 echo "paste-your-public-key-here" >> ~/.ssh/authorized_keys
 ```
 
-> Appends your public key to the server’s authorized_keys. Only paste the
-> “.pub” line, not the private key.
+> Adds your public key to the list of accepted login keys for the account.
+
+Verify the file contents:
 
 ```bash
 nano ~/.ssh/authorized_keys
 ```
 
-> Verify the key was added correctly and is on a single line. Remove duplicates
-> or stale keys.
+> Lets you confirm the key is present as a single clean line and that nothing accidental was pasted into the file.
 
-```bash
-nano ~/.ssh/config
-```
+## Step 7: harden SSH before the internet gets any more ideas
 
-> Optional: create a local SSH profile. Example:
->
-> Host vps-server  
->     HostName <VPS_IP>  
->     User <USERNAME>  
->     IdentityFile ~/.ssh/id_ed25519
+Now edit the SSH daemon configuration:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
-> Open the SSH daemon config to harden access. Disallow root logins and disable
-> password authentication to force key-based access.
+At minimum, set or confirm the following values:
 
-```bash
+```text
 PermitRootLogin no
-```
-
-> Prevents logins as root over SSH. Always log in as your admin user and use
-> sudo for privilege escalation.
-
-```bash
 PasswordAuthentication no
-```
-
-> Disables password-based SSH logins. This removes a major brute-force attack
-> vector and ensures keys are required.
-
-```bash
-UsePAM no
-```
-
-> Disables PAM modules for SSH. If you later need PAM features (e.g., 2FA),
-> re-enable thoughtfully.
-
-```bash
+PubkeyAuthentication yes
 ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding no
 ```
 
-> Disables legacy interactive auth mechanisms, further tightening the SSH
-> surface.
+> These changes do the important work:
+>
+> - disable remote root login
+> - disable password login entirely
+> - force SSH key authentication
+> - reduce legacy or unnecessary authentication paths
+
+I also strongly recommend moving SSH away from port `22`:
+
+```text
+Port 2222
+```
+
+> Changing the port is not real security on its own, but it cuts down a huge amount of low-grade automated noise. Think of it as a filter, not a shield.
+
+Before restarting SSH, verify the config syntax:
 
 ```bash
-sudo cat /etc/ssh/sshd_config.d/50-cloud-init.conf
+sudo sshd -t
 ```
 
-> Checks for cloud-init overrides that might conflict with your hardening.
+> Checks the SSH daemon configuration for syntax errors. This step is important because a broken SSH config is one of the fastest ways to lock yourself out of your own server.
 
-```bash
-sudo cat /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
-```
-
-> Reviews additional layered settings; align them with your sshd_config.
-
-```bash
-sudo nano /etc/ssh/sshd_config.d/50-cloud-init.conf
-```
-
-> Edit cloud-init drop-in config if needed to ensure passwords and root logins
-> remain disabled.
-
-```bash
-sudo nano /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
-```
-
-> Update any defaults that re-enable weak SSH settings. Keep your original
-> session open to avoid lockouts.
+Restart SSH:
 
 ```bash
 sudo systemctl restart ssh
 ```
 
-> Applies the SSH changes. Test a new SSH session in another terminal before
-> closing the original one, so you can revert safely if needed.
+> Reloads the SSH daemon with the new settings.
 
-### 6) Configure firewall (UFW)
+Do **not** close your current session yet.
+Open a second terminal on your local machine and test the new login first:
 
 ```bash
-sudo apt install ufw
+ssh -p 2222 <USERNAME>@<VPS_IP>
 ```
 
-> Installs Ubuntu’s uncomplicated firewall. It’s a simple interface for default-
-> deny inbound policies and explicit allowed ports.
+Or with the key explicitly specified:
+
+```bash
+ssh -i ~/.ssh/id_ed25519_vps -p 2222 <USERNAME>@<VPS_IP>
+```
+
+> Verifies that the hardened SSH configuration actually works before you destroy your only active admin session.
+
+If this fails, fix it **before** logging out of the original root session.
+
+## Step 8: configure a firewall the sane way
+
+Now that SSH works on the new port, lock down the box.
+
+First, set default policies:
 
 ```bash
 sudo ufw default deny incoming
 ```
 
-> Blocks unsolicited inbound traffic. You will explicitly allow only what you
-> need.
+> Blocks all inbound traffic unless you explicitly allow it later.
 
 ```bash
 sudo ufw default allow outgoing
 ```
 
-> Allows outbound traffic by default so your server can reach package mirrors
-> and APIs.
+> Allows outbound traffic by default so the server can still fetch updates and reach external services.
+
+Allow your SSH port:
 
 ```bash
-sudo ufw allow ssh
+sudo ufw allow 2222/tcp
 ```
 
-> Opens the SSH port so you don’t lock yourself out. If you later change your
-> SSH port, adjust this rule accordingly.
+> Opens the one public management door you still need.
 
-```bash
-sudo ufw allow 80/tcp
-```
-
-> Opens HTTP. Add only if you run a web server or reverse proxy.
-
-```bash
-sudo ufw allow 443/tcp
-```
-
-> Opens HTTPS. Add only if you need encrypted web access.
+Enable the firewall:
 
 ```bash
 sudo ufw enable
 ```
 
-> Activates the firewall with the current rules. Confirm access from a second
-> terminal before closing your session.
+> Activates the firewall rules. Do this only after allowing your SSH port, otherwise you may immediately block yourself.
+
+Check status:
 
 ```bash
 sudo ufw status verbose
 ```
 
-> Displays active rules and policies so you can confirm the firewall is in the
-> intended state.
+> Shows the active rules and default policy so you can verify the firewall is doing what you think it is doing.
 
-### 7) Install and configure Fail2ban
+If later you host something public, such as a website, explicitly add only the ports you need.
 
-```bash
-sudo apt install fail2ban
-```
-
-> Installs Fail2ban, which monitors logs and temporarily bans abusive IPs.
+For example:
 
 ```bash
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
 ```
 
-> Creates a local override file you can safely edit without changing defaults.
+> Opens HTTP and HTTPS only when you actually intend to serve a public web application.
+
+This is the right mental model: block everything, then slowly reintroduce only what the system genuinely needs.
+
+## Step 9: enable fail2ban
+
+Even if password logins are disabled, it is still useful to auto-ban hostile IPs that keep hammering SSH.
+
+Enable and start the service:
+
+```bash
+sudo systemctl enable --now fail2ban
+```
+
+> Starts `fail2ban` immediately and ensures it also starts on boot.
+
+Create a local jail configuration:
 
 ```bash
 sudo nano /etc/fail2ban/jail.local
 ```
 
-> Enable the sshd jail and configure thresholds (e.g., maxretry=3, bantime=3600,
-> findtime=600). Add ignoreip for trusted admin IPs to avoid accidental bans.
+Use something like:
 
-```bash
-sudo systemctl enable fail2ban
+```ini
+[sshd]
+enabled = true
+port = 2222
+backend = systemd
+maxretry = 5
+findtime = 10m
+bantime = 1h
 ```
 
-> Ensures Fail2ban starts automatically on boot.
+> Tells `fail2ban` to watch SSH authentication logs on your chosen port and temporarily ban IPs that repeatedly fail.
+
+Restart fail2ban:
 
 ```bash
-sudo systemctl start fail2ban
+sudo systemctl restart fail2ban
 ```
 
-> Starts the service immediately so protections take effect.
+> Applies your local jail settings.
 
-```bash
-sudo fail2ban-client status
-```
-
-> Shows Fail2ban’s global status and enabled jails.
+Check status:
 
 ```bash
 sudo fail2ban-client status sshd
 ```
 
-> Displays details for the sshd jail, including currently banned IPs.
+> Shows whether the SSH jail is active and how many IPs are currently banned.
 
-### 8) Memory checks and swap file
+Yes, key-only SSH already does the important work. No, that does not make banning repeated nonsense useless.
 
-```bash
-sudo journalctl | grep -i "out of memory"
-```
-
-> Searches logs for OOM events. Frequent OOMs indicate you should add RAM,
-> reduce workloads, or add swap to buffer spikes.
-
-```bash
-sudo fallocate -l 2G /swapfile
-```
-
-> Allocates a 2G swapfile. Adjust size based on your instance; small VPS hosts
-> benefit from modest swap.
-
-```bash
-sudo chmod 600 /swapfile
-```
-
-> Locks down permissions so the swapfile cannot be read by other users.
-
-```bash
-sudo mkswap /swapfile
-```
-
-> Initializes the swapfile for use by the kernel.
-
-```bash
-sudo swapon /swapfile
-```
-
-> Activates swap immediately.
-
-```bash
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-```
-
-> Makes swap persistent across reboots by adding it to fstab.
-
-```bash
-free -h
-```
-
-> Verifies available memory and swap in a human-readable format.
-
-### 9) Verification checklist
-
-```bash
-sudo sshd -T
-```
-
-> Prints the effective SSH configuration as interpreted by the daemon, so you
-> can confirm hardening settings are active.
-
-```bash
-sudo netstat -tulpn
-```
-
-> Lists listening ports and owning processes. Requires net-tools. Use this to
-> confirm only intended services are exposed.
-
-```bash
-sudo ufw status verbose
-```
-
-> Displays firewall policies and open ports. Cross-check with netstat to ensure
-> consistency.
-
-```bash
-sudo fail2ban-client status
-```
-
-> Confirms Fail2ban is running and shows enabled jails.
-
-```bash
-sudo journalctl -fu sshd
-```
-
-> Tails SSH logs in real time. Test a login and watch entries to verify behavior
-> and investigate unexpected errors.
-
-### 10) Regular maintenance tasks
-
-```bash
-sudo apt update
-```
-
-> Refreshes package indexes so you see the latest available updates.
-
-```bash
-sudo apt upgrade
-```
-
-> Applies updates. Schedule this weekly at minimum; more frequent for exposed
-> services.
-
-```bash
-sudo tail -f /var/log/auth.log
-```
-
-> Watches authentication logs in real time. Detects login attempts and unusual
-> activity quickly.
-
-```bash
-sudo tail -f /var/log/fail2ban.log
-```
-
-> Monitors Fail2ban’s actions and alerts so you know when IPs are being banned
-> or unbanned.
-
-```bash
-sudo tail -f /var/log/ufw.log
-```
-
-> Streams firewall logs to surface unexpected inbound hits or misconfigurations.
-
-## Security best practices
-
-1. Store SSH private keys securely with strong passphrases; back them up safely.
-2. Keep an inventory of authorized users and keys; remove stale accounts.
-3. Default-deny inbound with UFW; only open required ports.
-4. Rotate SSH keys periodically, especially when team membership changes.
-5. Monitor system resources, disk usage, and logs; set alerts for anomalies.
-6. Apply security updates promptly; unattended security upgrades help.
-7. Document custom ports and changes for easy auditing and troubleshooting.
-8. Prefer privacy-preserving VPS providers (e.g., 1984.hosting, mynymbox.net).
-9. Pay with Bitcoin after a Whirlpool coinjoin, Bitcoin via Lightning, or Monero
-   to reduce identity linkage to your server.
-
-## Useful command list for beginners
-
-System and OS information:
-
-```bash
-uname -a
-```
-
-> Shows kernel and basic system info; useful for confirming environment.
-
-```bash
-hostnamectl
-```
-
-> Displays and can set the system’s hostname and OS metadata.
-
-```bash
-uptime
-```
-
-> Tells how long the server has been running and current load averages.
-
-```bash
-lsb_release -a
-```
-
-> Prints distro details (if lsb-release is installed) for quick identification.
-
-```bash
-cat /etc/os-release
-```
-
-> Shows OS name and version from the standard release file.
-
-```bash
-lscpu
-```
-
-> Describes CPU model, cores, architecture—handy for sizing workloads.
-
-Hardware and usage:
-
-```bash
-lspci
-```
-
-> Lists PCI devices. In VPS, often minimal; more relevant on bare metal.
-
-```bash
-lsusb
-```
-
-> Lists USB devices. In VPS, commonly empty; useful on physical hosts.
-
-```bash
-free -h
-```
-
-> Shows memory usage with human-readable units.
-
-```bash
-df -h
-```
-
-> Displays disk usage by filesystem, highlighting space pressure.
-
-```bash
-du -sh <directory>
-```
-
-> Summarizes the size of a directory. Helps find large folders quickly.
-
-Users and groups:
-
-```bash
-whoami
-```
-
-> Prints your current username; confirms which account you’re operating under.
-
-```bash
-id
-```
-
-> Shows user and group IDs as well as group memberships.
-
-```bash
-adduser <user>
-```
-
-> Creates a user interactively with home directory and default settings.
-
-```bash
-usermod -aG sudo <user>
-```
-
-> Adds a user to the sudo group for privilege escalation.
-
-```bash
-passwd <user>
-```
-
-> Changes a user’s password. Use for initial setup or urgent rotation.
-
-```bash
-deluser <user>
-```
-
-> Removes a user. Clean up accounts that no longer need access.
-
-```bash
-groups
-```
-
-> Lists groups the current user is a member of.
-
-```bash
-groupadd <group>
-```
-
-> Creates a new group, useful for organizing privileges.
-
-```bash
-gpasswd -a <user> <group>
-```
-
-> Adds a user to a group via gpasswd (group password management).
-
-```bash
-last
-```
-
-> Shows login history, useful for detecting unusual access patterns.
-
-```bash
-w
-```
-
-> Shows who is logged in and their current activity.
-
-Files and directories:
-
-```bash
-ls -l
-```
-
-> Lists files with permissions, ownership, and timestamps.
-
-```bash
-ls -a
-```
-
-> Includes hidden files (dotfiles) in listings.
-
-```bash
-cd <directory>
-```
-
-> Changes the current directory.
+## Step 10: enable automatic security updates
 
-```bash
-pwd
-```
-
-> Prints the present working directory.
-
-```bash
-mkdir <directoryname>
-```
-
-> Creates a new directory.
-
-```bash
-rmdir <directoryname>
-```
-
-> Removes an empty directory; fails if it contains files.
-
-```bash
-rm -rf <directory>
-```
-
-> Recursively deletes a directory and all contents. Use with caution.
-
-```bash
-cp <file1> <file2>
-```
-
-> Copies a file. Use -r for directories.
-
-```bash
-mv <file1> <file2>
-```
-
-> Moves or renames a file or directory.
-
-```bash
-touch <file.txt>
-```
-
-> Creates an empty file or updates its timestamp.
-
-```bash
-nano <file.txt>
-```
-
-> Opens a file in the nano editor for quick edits.
-
-```bash
-cat <file.txt>
-```
-
-> Prints file contents to the terminal.
-
-```bash
-less <file.txt>
-```
-
-> Views a file with paging; search with “/pattern”, quit with “q”.
-
-```bash
-head -n 20 <file.txt>
-```
-
-> Shows the first 20 lines of a file; adjust the number as needed.
-
-```bash
-tail -f /var/log/syslog
-```
-
-> Streams a log in real time; great for debugging and monitoring.
-
-Search and size:
-
-```bash
-find / -name "<name>.<file-type>"
-```
-
-> Searches by name and extension, starting at root. May be slow; narrow paths
-> for performance.
-
-Networking:
-
-```bash
-ip a
-```
-
-> Shows network interfaces and IP addresses; confirms connectivity config.
-
-```bash
-ifconfig
-```
-
-> Legacy interface listing (requires net-tools). Use “ip” in modern setups.
-
-```bash
-ping <website>
-```
-
-> Checks basic connectivity and round-trip latency.
-
-```bash
-traceroute <website>
-```
-
-> Reveals the path packets take; useful for routing issues.
-
-```bash
-nslookup <website>
-```
-
-> Queries DNS for a domain; confirm resolution and records.
-
-```bash
-dig <website>
-```
-
-> Detailed DNS query tool; shows record TTLs and authoritative servers.
-
-```bash
-netstat -tulnp
-```
-
-> Lists listening ports and processes (requires net-tools). Alternative: “ss”.
-
-```bash
-ss -tulnp
-```
-
-> Modern tool to list sockets/ports without needing net-tools.
-
-```bash
-curl <URL>
-```
+Most people are happy to talk about security right up until the part where they must keep doing it.
 
-> Fetches URL content; great for testing endpoints and APIs.
+Automatic security updates help bridge that gap.
 
-```bash
-wget <URL>
-```
-
-> Downloads files over HTTP/HTTPS/FTP.
-
-```bash
-scp file user@server:/directory
-```
-
-> Copies files over SSH; secure alternative to FTP.
-
-```bash
-rsync -av file user@server:/directory
-```
-
-> Synchronizes files/directories efficiently; preserves attributes with “-a”.
-
-```bash
-ftp <server>
-```
-
-> Connects to FTP servers (not recommended for secure workflows).
-
-```bash
-telnet host <port>
-```
-
-> Tests TCP connectivity to a specific port; useful for quick checks.
-
-Packages (Debian/Ubuntu):
-
-```bash
-apt update
-```
-
-> Refreshes package lists; run before installing/upgrading.
-
-```bash
-apt upgrade
-```
-
-> Upgrades packages; consider “-y” for automation with care.
-
-```bash
-apt full-upgrade
-```
-
-> Upgrades including dependencies that may remove/install packages.
-
-```bash
-apt install <package>
-```
-
-> Installs a package from the repositories.
-
-```bash
-apt remove <package>
-```
-
-> Uninstalls a package but leaves config files.
-
-```bash
-apt purge <package>
-```
-
-> Removes a package and its config files for a clean slate.
+Enable the service if you have not already:
 
 ```bash
-apt autoremove
+sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
-> Cleans up unused dependencies after removals.
+> Walks you through enabling automatic installation of security updates.
 
-```bash
-apt dpkg -i <file.deb>
-```
-
-> Installs a local .deb file; use with caution and verify signatures.
-
-```bash
-dpkg -l
-```
-
-> Lists installed packages; useful for audits and troubleshooting.
-
-Permissions:
-
-```bash
-chmod 755 <file>
-```
-
-> Sets file permissions (rwx for owner, rx for group/others). Choose carefully.
-
-```bash
-chown <user>:<group> <file>
-```
-
-> Changes file ownership to the specified user and group.
-
-```bash
-chgrp <group> <file>
-```
-
-> Changes a file’s group ownership.
-
-```bash
-umask 022
-```
-
-> Sets default permission mask for new files. Adjust to tighten defaults.
-
-```bash
-stat <file>
-```
-
-> Shows detailed metadata and permissions for a file.
-
-Extras:
-
-```bash
-alias ll='ls -la'
-```
-
-> Sets a handy alias for detailed listings.
+Inspect the config:
 
 ```bash
-history
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
 ```
 
-> Displays your shell command history.
+> Lets you confirm that the security repositories for your distro are enabled.
 
-```bash
-!<number>
-```
+You can also review periodic behavior here:
 
-> Re-runs a specific command from history by its number.
-
 ```bash
-clear
+sudo nano /etc/apt/apt.conf.d/20auto-upgrades
 ```
 
-> Clears the terminal screen for readability.
+A sensible configuration is:
 
-```bash
-echo "Hello"
+```text
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
 ```
-
-> Prints a string to the terminal; useful for quick tests.
 
-```bash
-date
-```
+> Tells the system to refresh package lists daily and apply unattended security upgrades automatically.
 
-> Shows the current date and time.
+Dry-run the updater:
 
 ```bash
-cal
+sudo unattended-upgrades --dry-run --debug
 ```
 
-> Displays a calendar.
+> Tests the unattended-upgrades configuration without actually installing packages.
 
-```bash
-shutdown -h now
-```
+This matters because security that depends entirely on you remembering to care every single week is not really a security plan.
 
-> Shuts down the system immediately and halts power.
+## Step 11: fix time, timezone, and basic OS sanity
 
-```bash
-reboot
-```
+A server with the wrong clock becomes annoying in surprisingly creative ways.
 
-> Restarts the system.
+Check current time settings:
 
 ```bash
 timedatectl
 ```
 
-> Shows or sets time and timezone; ensure correct time for TLS and logs.
+> Shows the current time, timezone, NTP status, and clock synchronization state.
+
+Set your timezone:
 
 ```bash
-crontab -e
+sudo timedatectl set-timezone Europe/London
 ```
 
-> Edits scheduled cron jobs for the current user.
+> Sets the server timezone. Replace this with your own if needed. In this example you have set it up with the London timezone.
 
-## Closing thoughts
+Enable NTP time sync:
 
-This baseline focuses on strong, simple controls: SSH keys only, no root logins, default-deny firewall, abuse detection with Fail2ban, and routine updates. 
+```bash
+sudo timedatectl set-ntp true
+```
 
-This should help you get up and running with your first VPS securely.
+> Ensures the server keeps its clock in sync automatically.
 
-Always remember to do your own research!
+If you want a quick look at host identity and OS details:
+
+```bash
+hostnamectl
+```
+
+> Displays your hostname, kernel, architecture, and operating system information.
+
+And if you want to rename the box:
+
+```bash
+sudo hostnamectl set-hostname <NEW_HOSTNAME>
+```
+
+> Changes the server hostname to something memorable and sane.
+
+## Step 12: disable IPv6 if you are not using it
+
+If you do not intend to use IPv6 on the VPS, disabling it can reduce a class of “I forgot that path existed” problems.
+
+Edit sysctl settings:
+
+```bash
+sudo nano /etc/sysctl.d/99-disable-ipv6.conf
+```
+
+Add:
+
+```ini
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+```
+
+> Disables IPv6 system-wide. This is only appropriate if you have no need for IPv6 services.
+
+Apply the settings:
+
+```bash
+sudo sysctl --system
+```
+
+> Reloads all sysctl configuration files so the new kernel network settings take effect.
+
+If you use UFW, also confirm its IPv6 behavior in:
+
+```bash
+sudo nano /etc/default/ufw
+```
+
+Set:
+
+```text
+IPV6=no
+```
+
+> Prevents UFW from managing IPv6 rules if you have decided IPv6 is entirely out of scope for this server.
+
+This is not mandatory. It is simply one of those things that helps some people sleep a little better.
+
+## Step 13: basic file layout and permissions discipline
+
+Do not dump production services into random home-directory folders and call it architecture.
+
+A simple pattern that works well is:
+
+```bash
+sudo mkdir -p /opt/apps
+sudo mkdir -p /var/lib/<APP_NAME>
+sudo mkdir -p /etc/<APP_NAME>
+```
+
+> Creates a clearer separation between application files, persistent data, and configuration.
+
+For example:
+
+- `/opt/apps` for application code or unpacked binaries
+- `/var/lib/<APP_NAME>` for data the service needs to keep
+- `/etc/<APP_NAME>` for configuration files
+
+Then assign ownership sensibly:
+
+```bash
+sudo chown -R <USERNAME>:<USERNAME> /opt/apps
+sudo chown -R <USERNAME>:<USERNAME> /var/lib/<APP_NAME>
+sudo chown -R root:root /etc/<APP_NAME>
+```
+
+> Keeps writable application/data paths owned by the service user while leaving configuration rooted where appropriate.
+
+This is not glamorous, but good directory hygiene saves time later.
+
+## Step 14: final checklist
+
+Before you install the application you actually care about, the server should look something like this:
+
+- package lists updated
+- base packages upgraded
+- non-root sudo user created
+- SSH key authentication working
+- root SSH login disabled
+- password SSH disabled
+- SSH moved to a non-default port or restricted to private mesh only
+- firewall enabled with a deny-by-default policy
+- fail2ban running
+- unattended security updates enabled
+- time and timezone configured
+- application directories structured sensibly
+
+That is already a much better environment than the average “I spun up a VPS and started installing stuff immediately” setup.
+
+## Final thoughts
+
+A VPS should not be treated like a disposable toy just because cloud panels make it feel that way.
+
+It is a public machine on a hostile network. That sounds dramatic, but it is also just true. Once you accept that, the setup order becomes obvious. First you reduce exposure. Then you improve reliability. Then you install the fun part.
+
+That is the boring discipline that keeps your server from becoming somebody else’s hobby.
+
+This guide is Ubuntu and Debian based because those are still the most practical defaults for most people. There are fancier and weirder ways to do all of this. There are also worse ways, and they are usually the ones people call “simple” right before they get locked out, forget their SSH key, expose half the machine to the public web, or decide they will “set up security later.”
+
+Do not set it up later.
+
+Set it up first.
