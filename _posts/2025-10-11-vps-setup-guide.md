@@ -5,6 +5,7 @@ categories: [Guide, Privacy]
 tags: [vps,security,mynymbox,hosting,server]     # TAG names should always be lowercase
 description: Learn to securely set up and harden a Debian or Ubuntu VPS step by step
 # comments: false
+pin: true
 image: /assets/img/linux-vps-guide-images/header.png
 ---
 
