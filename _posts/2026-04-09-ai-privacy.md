@@ -111,7 +111,7 @@ This is a marginal improvement in privacy, but not a fundamental one. You have a
 
 ## Level 3: Proxy provider with privacy-preserving payment
 
-This is where things get more interesting. Services like PayPerQ and [NanoGPT](https://nano-gpt/r/rPX4DqGc) — my personal favorite because it is the most versatile; using my affiliate link gives both of us a discount, and you get 5% off all AI usage — allow you to pay with privacy-preserving cryptocurrencies like Bitcoin via Lightning, post-Whirlpool coinjoined Bitcoin, or Monero.
+This is where things get more interesting. Services like PayPerQ and [NanoGPT](https://nano-gpt.com/r/rPX4DqGc) — my personal favorite because it is the most versatile; using my affiliate link gives both of us a discount, and you get 5% off all AI usage — allow you to pay with privacy-preserving cryptocurrencies like Bitcoin via Lightning, post-Whirlpool coinjoined Bitcoin, or Monero.
 
 **What improves significantly:**
 
@@ -131,7 +131,7 @@ This is where things get more interesting. Services like PayPerQ and [NanoGPT](h
 
 - **Service stability**: Smaller, crypto-native providers may have less stable infrastructure than major AI companies. They may be less transparent about which model has how many providers and their uptime.
 
-- **Policy changes mid-cycle**: [NanoGPT](https://nano-gpt/r/rPX4DqGc), for example, has changed what models are avaliable in its subscription during billing cycles. Understandable from a business perspective, but can be frustrating as a customer.
+- **Policy changes mid-cycle**: [NanoGPT](https://nano-gpt.com/r/rPX4DqGc), for example, has changed what models are avaliable in its subscription during billing cycles. Understandable from a business perspective, but can be frustrating as a customer.
 
 - **Uptime variability**: These services may experience more downtime or rate limiting than major providers.
 
