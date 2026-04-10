@@ -10,9 +10,9 @@ image: /assets/img/am-i-exposed/header.png
 author: vibrant
 ---
 
-Self-hosting software manually is one of those things that sounds more intimidating than it really is. The actual work is usually quite ordinary: read the project, understand what it expects, wire a few containers together, and stop pretending you need an app store for every small web service.
+Self-hosting software manually is one of those things that sounds more intimidating than it really is. The actual work is usually quite ordinary: read the project, understand what it expects, wire a few containers together, and stop pretending you need an app store for every new app.
 
-That is especially true for [am-i.exposed](https://am-i.exposed/), which is not some sprawling service with ten moving parts and a mystery control plane hidden somewhere behind the curtain. If you already run your own Bitcoin node and your own [mempool.space](https://mempool.space/) instance, hosting this part yourself is very manageable.
+That is especially true for [am-i.exposed](https://am-i.exposed/), which is not some sprawling service with ten moving parts and a mystery control plane hidden somewhere behind the curtain. If you already run your own Bitcoin node and your own mempool.space instance, hosting this application yourself is very manageable.
 
 In this guide, I am going to assume two things are already true:
 
