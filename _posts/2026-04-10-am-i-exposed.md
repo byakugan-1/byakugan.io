@@ -3,7 +3,7 @@ title: How to easily self host am-i.exposed
 date: 2026-04-10 01:00:00 +0000
 categories: [Guide, Privacy]
 tags: [bitcoin,privacy,self-hosting,docker,docker-compose,mempool,tor,umbrel]
-description: Run am-i.exposed yourself with Docker using either built locally or via the prebuilt images
+description: Run am-i.exposed yourself with Docker either built locally or via the prebuilt images
 # comments: false
 pin: true
 image: /assets/img/am-i-exposed/header.png
