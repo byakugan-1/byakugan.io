@@ -76,13 +76,13 @@ services:
       TOR_PROXY_PORT: "9050"
 ```
 
-Environment Variables Explained:
+Environment variables explained:
 
-- [`APP_MEMPOOL_IP`](../am-i-exposed/umbrel/nginx.conf.template) should point to the host or container name of your existing mempool backend;
-- [`APP_MEMPOOL_PORT`](../am-i-exposed/umbrel/nginx.conf.template) should be the HTTP port exposed by that backend;
-- [`APP_TOR_PROXY_IP`](../am-i-exposed/umbrel/nginx.conf.template) points to the sidecar service name, which is why [`tor-proxy`](../am-i-exposed/docker-compose.test.yml) works;
-- [`APP_TOR_PROXY_PORT`](../am-i-exposed/umbrel/nginx.conf.template) stays at `3001` unless you intentionally change the sidecar configuration;
-- [`APP_MEMPOOL_HIDDEN_SERVICE`](../am-i-exposed/docker-compose.test.yml) can stay blank unless you specifically want to surface a hidden service hostname.
+- `APP_MEMPOOL_IP` should point to the host or container name of your existing mempool backend;
+- `APP_MEMPOOL_PORT` should be the HTTP port exposed by that backend;
+- `APP_TOR_PROXY_IP` points to the sidecar service name, which is why `tor-proxy` works;
+- `APP_TOR_PROXY_PORT` stays at `3001` unless you intentionally change the sidecar configuration;
+- `APP_MEMPOOL_HIDDEN_SERVICE` can stay blank unless you specifically want to surface a hidden service hostname.
 
 ### Start the stack up
 
@@ -157,8 +157,8 @@ docker compose up -d --build
 
 This tells Compose to:
 
-- build the main image from [`Dockerfile.umbrel`](../am-i-exposed/Dockerfile.umbrel);
-- build the sidecar from [`umbrel/tor-proxy/Dockerfile`](../am-i-exposed/umbrel/tor-proxy/Dockerfile);
+- build the main image from the repository’s main Docker build file;
+- build the Tor sidecar from the repository’s Tor proxy Docker build file;
 - create and start both containers in the background.
 
 ### Why this works
