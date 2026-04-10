@@ -36,7 +36,7 @@ The deployment documentation in the [am-i.exposed repository](https://github.com
 - `ghcr.io/copexit/am-i-exposed-umbrel`
 - `ghcr.io/copexit/am-i-exposed-tor-proxy`
 
-Despite the naming, you do not need to run Umbrel itself to use them. You can run the same images with plain Docker Compose, as long as you provide the environment variables expected by the nginx template.
+Despite the naming, you do not need to run Umbrel itself to use them. You can run the same images with plain Docker Compose, as long as you provide the expected environment variables.
 
 ### Create a directory for your deployment
 
