@@ -15,9 +15,11 @@ The basic workflow is easy enough: rent a server, get an IP address, log in over
 
 The real workflow is slightly different.
 
-You rent the server, get the IP address, and before you have even finished admiring your fresh machine, the password guessing starts. That is not paranoia. That is just how public IPv4 works. A new VPS is not a quiet cottage in the countryside. It is an unlocked shed dropped into the middle of a rough industrial estate.
+You rent the server, get the IP address, and before you have even finished admiring your fresh machine, the password guessing starts. That is not paranoia. That is just how public IPv4 works. Automated scanners sweep the entire IPv4 address space continuously. Within minutes of a new VPS coming online, bots will find it and begin probing for weak passwords, open ports, and known vulnerabilities. A new VPS is not a quiet cottage in the countryside. It is an unlocked shed dropped into the middle of a rough industrial estate.
 
-So the first rule is simple: do not install your application first. Secure the box first.
+**Securing your VPS is not optional. It is not something you get around to later. It is the very first thing you do.** If you skip this step, you are not taking a small risk. You are handing your server to the first script or botnet that finds it. Every minute an unsecured VPS sits on the public internet is a minute it is being actively probed, tested, and potentially compromised.
+
+So the first rule is non-negotiable: do not install your application first. Secure the box first. No exceptions.
 
 This guide walks through a clean Ubuntu or Debian based VPS setup in the order that actually makes sense:
 
@@ -40,8 +42,10 @@ If privacy matters to you, the process starts before you ever type your first SS
 
 Choose providers that minimise data collection and support privacy-preserving payments:
 
-- [1984.hosting](https://1984.hosting)
+
 - [mynymbox.io](https://mynymbox.io)
+- [1984.hosting](https://1984.hosting)
+- [Hostinger](https://hostinger.com)
 
 If possible, pay with Bitcoin after a Whirlpool coinjoin, Bitcoin via Lightning, or Monero. The point is not cosplay. The point is reducing unnecessary linkage between your real-world identity and a machine that may eventually host personal services, websites, automation, or tools you would prefer not to tie directly back to your legal name.
 
@@ -53,11 +57,12 @@ For a basic personal server, you usually do not need much.
 
 A good starting point is:
 
-- 1 vCPU
+- 2 vCPUs
 - 4 GB RAM
-- 80 to 100 GB storage
+- 50 to 100 GB storage
+- a suitable amount of bandwidth for your use case (most providers include 1–3 TB monthly, which is more than enough for personal infrastructure)
 
-That is plenty for many self-hosted tools, websites, dashboards, VPN utilities, lightweight bots, and general personal infrastructure.
+That is plenty for many self-hosted tools, websites, dashboards, VPN utilities, lightweight bots, and general personal infrastructure. Two cores give you enough headroom to run a few services concurrently without things grinding to a halt, and 4 GB of RAM keeps you comfortable for most lightweight self-hosting workloads.
 
 If all you are doing is hardening a small box for later use, do not overthink it. You can always resize later. It is usually better to start small with a clean and understandable machine than to immediately rent a larger one you do not yet know how to manage.
 
@@ -123,7 +128,15 @@ cat ~/.ssh/id_ed25519_vps.pub
 
 > Prints the public half of your SSH key. This is safe to share. Never share the private key file.
 
-If your VPS provider lets you inject an SSH key during server creation, do that. It is cleaner than enabling password logins at the start.
+### Getting your key onto the server: two paths
+
+How your SSH key reaches the server depends on your VPS provider.
+
+**Path A: provider lets you add the key before deployment.** Some providers (such as 1984.hosting and many others) let you paste your public key into their control panel before you spin up the VPS. If this option is available, use it. The server will be created with your key already installed for the root account, which means you can log in immediately with key-based authentication and never need to enable password login at all. This is the cleaner and more secure path.
+
+**Path B: provider does not support pre-deployment keys.** Other providers only give you a root password when the VPS is created. In this case, you will need to log in with that password first, then manually add your public key to the server's `~/.ssh/authorized_keys` file (covered in Step 6 below). Once the key is in place, you disable password authentication entirely. This path works fine, but it means your server briefly accepts password logins on the open internet, which is why you should do it immediately and not leave it for later.
+
+Either way, the end state is the same: key-only SSH access with passwords disabled.
 
 ## Step 2: first login as root
 
@@ -223,13 +236,17 @@ sudo whoami
 
 Now we make sure the new account can log in via SSH key.
 
+If your provider injected your SSH key at deployment time, it was added to the **root** account. Your new non-root user does not have it yet, so you need to set it up manually for that account. If your provider did not support pre-deployment keys, you will also need to do this for the new user.
+
+### Set up the SSH directory structure
+
 Create the SSH directory:
 
 ```bash
 mkdir -p ~/.ssh
 ```
 
-> Creates the `.ssh` directory in the new user’s home if it does not already exist.
+> The `-p` flag means "create parent directories as needed and do not error if the directory already exists." This command creates the `~/.ssh` directory inside your new user's home folder. OpenSSH looks in this specific directory for authentication material. Without it, key-based login for this account will not work.
 
 Lock down the permissions:
 
@@ -237,7 +254,9 @@ Lock down the permissions:
 chmod 700 ~/.ssh
 ```
 
-> Makes the SSH directory readable and writable only by the account owner. OpenSSH is picky about this, and rightly so.
+> Sets the directory permissions to `rwx------`, meaning only the owner can read, write, or list the contents of the directory. **This is not optional.** OpenSSH will silently refuse to use keys from a `.ssh` directory with loose permissions. The `700` permission ensures that no other user on the system can peek inside your SSH directory, which is exactly the point.
+
+### Create and secure the authorized_keys file
 
 Create the `authorized_keys` file:
 
@@ -245,7 +264,7 @@ Create the `authorized_keys` file:
 touch ~/.ssh/authorized_keys
 ```
 
-> Creates the file that stores public keys allowed to log in as this user.
+> Creates the file that stores public keys allowed to log in as this user. If the file already exists, `touch` simply updates its timestamp without changing the contents.
 
 Set its permissions:
 
@@ -253,7 +272,9 @@ Set its permissions:
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-> Restricts access to the file so OpenSSH will accept it.
+> Sets the file permissions to `rw-------`, meaning only the owner can read or write the file. Again, **OpenSSH enforces this.** If the `authorized_keys` file is readable by other users (for example, `644` instead of `600`), the SSH daemon will ignore it entirely and your key login will fail with no obvious error message. The `600` permission ensures that only your user account can view or modify the list of trusted keys.
+
+### Add your public key
 
 Then, from your local machine, display your public key if you need to copy it again:
 
@@ -261,13 +282,13 @@ Then, from your local machine, display your public key if you need to copy it ag
 cat ~/.ssh/id_ed25519_vps.pub
 ```
 
-Append that key to the server’s `authorized_keys` file:
+Append that key to the server's `authorized_keys` file:
 
 ```bash
 echo "paste-your-public-key-here" >> ~/.ssh/authorized_keys
 ```
 
-> Adds your public key to the list of accepted login keys for the account.
+> Adds your public key to the list of accepted login keys for the account. Make sure you paste the entire key as a single unbroken line. A typical Ed25519 public key looks like: `ssh-ed25519 AAAAC3Nza...long string... vps-admin-key`
 
 Verify the file contents:
 
@@ -275,7 +296,20 @@ Verify the file contents:
 nano ~/.ssh/authorized_keys
 ```
 
-> Lets you confirm the key is present as a single clean line and that nothing accidental was pasted into the file.
+> Lets you confirm the key is present as a single clean line and that nothing accidental was pasted into the file. You should see exactly one line per key, starting with `ssh-ed25519` (or `ssh-rsa` if you used an older key type). If you see line breaks in the middle of a key, it will not work — fix it before moving on.
+
+### Quick permissions summary
+
+For reference, here is what the correct SSH file permissions look like:
+
+| Path | Permission | Octal | Why |
+|------|-----------|-------|-----|
+| `~/.ssh/` | `rwx------` | `700` | Only the owner can enter or list the directory |
+| `~/.ssh/authorized_keys` | `rw-------` | `600` | Only the owner can read or edit the trusted key list |
+| `~/.ssh/id_ed25519` (private key) | `rw-------` | `600` | Private key must never be readable by anyone else |
+| `~/.ssh/id_ed25519.pub` (public key) | `rw-r--r--` | `644` | Public key can be world-readable (it is not secret) |
+
+If SSH key login is not working and you cannot figure out why, incorrect permissions on these files are the most common cause.
 
 ## Step 7: harden SSH before the internet gets any more ideas
 
