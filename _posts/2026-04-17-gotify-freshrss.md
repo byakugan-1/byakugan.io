@@ -13,7 +13,7 @@ author: vibrant
 I've been using [FreshRSS](https://docs.linuxserver.io/images/docker-freshrss/) as my self-hosted RSS reader for a while now, and while it's excellent at aggregating feeds, I always wanted real-time push notifications for the feeds that matter most. That's why I built a Gotify notification extension for FreshRSS.
 
 <div style="text-align: center;">
-  <img src="assets/img/gotify/demo.png" alt="Gotify FreshRSS Extension" width="600" />
+  <img src="assets/img/gotify/demo.png" alt="Gotify FreshRSS Extension" width="350" />
 </div>
 
 ## Why Gotify?
